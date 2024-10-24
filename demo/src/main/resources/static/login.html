@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+    <!-- Link to Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        Login to Your Account
+    </div>
+    <div class="container">
+        <form onsubmit="return loginUser()">
+            <label for="username" class="labelc">Username:</label>
+            <input type="text" placeholder="Enter Username" name="username" id="username" required><br>
+
+            <label for="password" class="labelc">Password:</label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required><br>
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <div class="signup">
+                <p class="signup">If you are a new user, <a href="signup.html">SIGN UP</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function loginUser() {
+            // Get the username and password values
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Simple validation (you can customize this logic)
+            if (username === username && password === password) {
+                // Redirect to profile page
+                window.location.href = "home.html";
+                return false; // Prevent form from actually submitting (since we handle redirection)
+            } else {
+                alert("Invalid username or password!");
+                return false; // Prevent form from submitting if login fails
+            }
+        }
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const user = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            // Send login request to backend
+            fetch('http://localhost:8080/api/demo/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "Login successful") {
+                        alert("Login successful!");
+                        window.location.href = "home.html";  // Redirect on successful login
+                    } else {
+                        alert("Invalid login credentials");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        // Assuming the signup is successful
+        const contentType = document.getElementById('content').value; // Get content type from form
+
+        localStorage.setItem('username', username);  // Store username
+        localStorage.setItem('content', content);  // Store content type
+        // Redirect to the home page
+        window.location.href = "home.html";
+
+
+    </script>
+</body>
+</html>

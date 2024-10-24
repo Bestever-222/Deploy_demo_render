@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="viewmore.css">
+    <script defer src="viewmore.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="banner">
+            <img src="assets/banner.png" alt="Banner" class="banner-img">
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <nav class="dashboard-nav">
+            <a href="#" class="nav-item" onclick="showSection('videos')">Videos</a>
+            <a href="#" class="nav-item" onclick="showSection('shorts')">Shorts</a>
+            <a href="#" class="nav-item" onclick="showSection('playlists')">Playlists</a>
+            <a href="#" class="nav-item" onclick="showSection('community')">Community</a>
+        </nav>
+    </section>
+
+    <!-- Video Section -->
+    <section id="videos" class="section-content">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ipsa voluptatem tempora quos suscipit fugit inventore. Omnis nobis ullam, itaque unde doloribus dolorem fugiat quisquam laudantium mollitia sit praesentium autem.</h2>
+        <div class="video-item">
+            <img src="assets/video.jpg" alt="Video Thumbnail" class="video-thumbnail">
+            <div class="video-description">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic minima iste quam commodi culpa consectetur illum, earum qui ex vel voluptatem, itaque fugiat sunt temporibus sint deserunt. Explicabo, enim sequi?</p>
+                <p>173K views • 6 days ago</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shorts Section -->
+<section id="shorts" class="section-content">
+    <h2>Popular Shorts</h2>
+    <div class="shorts-container">
+        <div class="short-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
+            <p class="short-title">Complete DSA series on YouTube by Shradha</p>
+            <p class="short-views">387K views</p>
+        </div>
+        <div class="short-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
+            <p class="short-title">How should Software Engineers plan their career?</p>
+            <p class="short-views">224K views</p>
+        </div>
+        <div class="short-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
+            <p class="short-title">Major Issue for students! For Jobs, Degree, Skills</p>
+            <p class="short-views">1.7M views</p>
+        </div>
+        <div class="short-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
+            <p class="short-title">Statically & Dynamically Typed Languages</p>
+            <p class="short-views">1M views</p>
+        </div>
+        <div class="short-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
+            <p class="short-title">Is DSA Compulsory? #tech #coding</p>
+            <p class="short-views">877K views</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Playlists Section -->
+    <section id="playlists" class="section-content" style="display: none;">
+        <h2>Top Playlists</h2>
+        <div class="playlist-item">
+            <img src="assets/video.jpg" alt="Playlist Thumbnail" class="playlist-thumbnail">
+            <div class="playlist-description">
+                <p>Learn Full Stack Development
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem porro sed quo velit labore expedita harum nulla repellat, magni ut aut omnis cum blanditiis id consectetur quod! Enim, vel fugit!
+                </p>
+                <p>20 videos • Updated 2 weeks ago</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section-content" style="display: none;">
+        <h2>Community Posts</h2>
+        <div class="community-post">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Here's an update from our community 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid distinctio harum at alias consectetur iusto asperiores necessitatibus minima fugiat adipisci tempora quia voluptatum maxime cumque, ipsam facere eum corrupti nisi.
+            </p>
+            <div class="post-stats">
+                <p>5K likes • 200 comments</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

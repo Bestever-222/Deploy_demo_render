@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Profile Form</title>
+    <link rel="stylesheet" href="signup.css">
+    <!-- Link to Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    Create a new profile
+</div>
+<div class="container">
+    <form id="signupForm">
+        <label for="username" class="labelc">Enter Username:</label>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required><br>
+
+        <label for="password" class="labelc">Enter Password:</label>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required><br>
+
+        <label for="confirmpassword" class="labelc">Confirm Password:</label>
+        <input type="password" placeholder="Confirm Password" name="confirmpassword" id="confirmpassword" required><br>
+
+        <label for="email" class="labelc">Enter Email:</label>
+        <input type="email" placeholder="Enter Email" name="email" id="email" required><br>
+
+        <label for="gender" class="labelc">Select Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="transgender">Transgender</option>
+        </select><br><br>
+
+        <label for="content" class="labelc">Select Type of Content:</label>
+        <select id="content" name="content" required>
+            <option value="" disabled selected>Select Type</option>
+            <option value="Bloggers">Bloggers</option>
+            <option value="Vloggers">Vloggers</option>
+            <option value="Podcasters">Podcasters</option>
+            <option value="Social Media Influencers">Social Media Influencers</option>
+            <option value="Streamers">Streamers</option>
+            <option value="Photographers">Photographers</option>
+            <option value="Graphic Designers / Digital Artists">Graphic Designers / Digital Artists</option>
+            <option value="Writers / Authors">Writers / Authors</option>
+            <option value="Memers">Memers</option>
+            <option value="Educational Content Creators">Educational Content Creators</option>
+            <option value="Musicians / Music Producers">Musicians / Music Producers</option>
+            <option value="Fitness / Health Coaches">Fitness / Health Coaches</option>
+            <option value="Animators">Animators</option>
+            <option value="Journalists / News Creators">Journalists / News Creators</option>
+            <option value="add-new" id="add-new-content">+ Add New</option>
+        </select><br><br>
+
+        <!-- Input to add new content type -->
+        <input type="text" id="newContent" placeholder="Enter new content type" style="display:none;" /><br>
+
+        <!-- Display selected content types below -->
+        <div id="selected-content-types"></div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn">Submit</button>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event)
+    {
+        event.preventDefault(); // Prevent form submission to server
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmpassword').value;
+        var email = document.getElementById('email').value;
+        var gender = document.getElementById('gender').value;
+        var content = document.getElementById('content').value;
+
+        // Check if the passwords match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return false;
+        }
+
+        const user = {
+            username: username,
+            password: password,
+            email: email,
+            gender: gender,
+            content: content
+        };
+
+        // Send signup request to the backend
+        fetch('http://localhost:8080/api/demo/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();  // Assuming server returns success message in plain text
+                } else {
+                    throw new Error("Signup failed");
+                }
+            })
+            .then(data => {
+                alert(data);  // Display backend response (e.g., "Signup successful")
+                if (data === "User registered successfully!") {
+                    // Use replace to redirect, so the current page is replaced in the history
+                    window.location.replace("login.html");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred during signup. Please try again.");
+            });
+    });
+
+    document.getElementById('content').addEventListener('change', function(event) {
+        const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
+        const addNewOption = 'add-new';
+
+        if (selectedOptions.includes(addNewOption)) {
+            document.getElementById('newContent').style.display = 'block';
+            document.getElementById('newContent').focus(); // Auto focus on input field
+        } else {
+            document.getElementById('newContent').style.display = 'none';
+        }
+
+        displaySelectedContentTypes();
+    });
+
+    // Handle new content addition when user presses Enter
+    document.getElementById('newContent').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+            const newContent = this.value.trim();
+            if (newContent) {
+                const contentSelect = document.getElementById('content');
+                const option = document.createElement('option');
+                option.value = newContent;
+                option.text = newContent;
+                contentSelect.appendChild(option);
+                option.selected = true; // Automatically select the newly added option
+                this.value = ''; // Clear the input field
+                document.getElementById('newContent').style.display = 'none'; // Hide input after adding
+                displaySelectedContentTypes();
+            }
+        }
+    });
+
+    function displaySelectedContentTypes() {
+        const selectedOptions = Array.from(document.getElementById('content').selectedOptions)
+            .map(option => option.text)
+            .filter(option => option !== '+ Add New'); // Exclude the '+ Add New' option from the display
+        const selectedContentDiv = document.getElementById('selected-content-types');
+        selectedContentDiv.innerHTML = `<strong>Selected Content Types:</strong> ${selectedOptions.join(', ')}`;
+    }
+
+</script>
+
+</body>
+</html>

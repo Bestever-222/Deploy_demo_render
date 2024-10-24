@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color:white;
+    color: #333;
+}
+
+/* Full-Width Header */
+.full-header {
+    width: 100%;
+    height: 300px;  /* Set a fixed height for the header */
+    background-image: url('assets/banner.png');  /* Replace with your provided background image */
+    background-size: cover;  /* Ensure the image covers the entire header */
+    background-position: center;  /* Center the background image */
+    position: relative;
+    border-bottom-left-radius: 25px;  /* Optional rounding of the bottom corners */
+    border-bottom-right-radius: 25px;
+}
+
+.profile-image {
+    position: absolute;
+    bottom: -60px;  /* Adjust the profile image to sit higher */
+    left: 30px;     /* Align profile image to the left */
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image img {
+    width: 200px;  /* Increased size of the profile image */
+    height: 200px;  /* Make height equal to width */
+    border-radius: 50%;
+}
+
+
+/* Profile Information Section */
+.profile-container {
+    margin-top: 80px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 80px auto;
+    background-color: rgb(242, 238, 238);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+.profile-container:hover {
+    transform: translateY(-10px); /* Uplift the container on hover */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3),   /* Larger shadow for more depth */
+                0 10px 10px rgba(0, 0, 0, 0.2);   /* Secondary softer shadow */
+}
+
+.profile-info h2 {
+    font-size: 28px;
+    color: #007acc;
+}
+
+.profile-info p {
+    font-size: 18px;
+    color: #555;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.social-icons img {
+    width: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+.follow-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.follow-stats span {
+    font-weight: bold;
+    color: #007acc;
+}
+.follow-btn {
+    background-color: #007acc;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.follow-btn:hover {
+    background-color: #005fa3;
+}
+
+.followed-btn {
+    background-color: #043558;  /* Green for "Followed" */
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.followed-btn:hover {
+    background-color: #043558;  /* Darker green on hover */
+}
+
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    font-weight: 500;
+}
+
+.follow-btn {
+    background-color: #007acc;
+    color: white;
+}
+
+.follow-btn:hover {
+    background-color: #005fa3;
+}
+
+.more-btn {
+    background-color: #f0f0f0;
+    color: #007acc;
+}
+
+.more-btn:hover {
+    background-color: #c9c6c6;
+}

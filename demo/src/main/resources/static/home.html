@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cre8Hub Interactive Layout</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+<!-- Navigation Bar -->
+<div class="nav-bar">
+    <h1>Cre8Hub</h1>
+</div>
+
+<!-- Main Layout -->
+<div class="main-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar-left">
+        <div class="profile-photo">
+            <img id="profileImage" src="assets/profile.jpg" alt="Profile Photo">
+            <input type="file" id="uploadPhoto" style="display:none;" accept="image/*">
+            <button id="uploadIcon">+</button> <!-- Plus icon for photo upload -->
+        </div>
+        <div class="profile-info">
+            <h2 id="username">Riya</h2> <!-- Add id for JavaScript targeting -->
+            <p id="content">Comedy content creator</p> <!-- Add id for content type -->
+        </div>
+        <div class="friends-list">
+            <h3>Friends</h3>
+            <button class="friend">Abhishek</button>
+            <button class="friend">Samay</button>
+            <button class="friend">Akash</button>
+        </div>
+    </div>
+
+    <!-- Central Content Area -->
+    <div class="content">
+        <div class="search-bar">
+            <input type="text" placeholder="Search content...">
+        </div>
+
+        <!-- Add Post Section -->
+        <div class="posts">
+            <h2>My Posts</h2>
+            <p id="noPostsMessage">You have no posts yet!</p>
+            <div id="postContainer"></div>
+
+            <!-- Input for text, images, and videos -->
+            <textarea id="postInput" placeholder="Write a post..."></textarea>
+            <input type="file" id="mediaInput" accept="image/,video/" multiple>
+            <button id="addPostButton">Add Post</button>
+        </div>
+
+        <!-- Recent Posts Section -->
+        <div class="recent-posts">
+            <h3>Recent Posts</h3>
+
+            <!-- Example of a Recent Post -->
+            <div class="user-post">
+                <div class="user-info">
+                    <img src="assets/profile.jpg" alt="Friend's Profile Photo">
+                    <div class="user-details">
+                        <h3>Abhishek</h3>
+                        <p>Travel Enthusiast</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p class="post-text">Just returned from an amazing trip to the mountains!</p>
+                    <img src="assets/post.jpg" alt="Post Image" class="post-image">
+                    <div class="interaction-icons">
+                        <button class="like-button" data-likes="0">❤ 0</button>
+                        <button class="share-button">🔗 Share</button>
+                        <button class="comment-button">💬 Comment</button>
+                        <button class="repost-button">🔄 Repost</button>
+                    </div>
+                    <div class="comment-box" style="display: none;">
+                        <textarea placeholder="Write a comment..."></textarea>
+                        <button class="submit-comment">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat user-post blocks for other recent posts as needed -->
+        </div>
+    </div>
+
+    <!-- Right Sidebar for Chats -->
+    <div class="sidebar-right">
+        <div class="search-chat">
+            <input type="text" placeholder="Search a friend to chat">
+        </div>
+        <div class="chat-box">
+            <p class="placeholder-text">Let's have a chat with your friend</p>
+        </div>
+    </div>
+</div>
+
+<script src="home.js"></script>
+</body>
+</html>
