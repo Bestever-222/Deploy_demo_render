@@ -1,0 +1,629 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Enhanced Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem; /* Reduce top and bottom padding for a thinner header */
+  background: linear-gradient(0deg, #4cafdc, #1d74b7); /* Light blue to deeper blue gradient */
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Sticks the header at the top */
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.logo h1 {
+  font-size: 1.4rem; /* Reduce the font size for a thinner header */
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.header-buttons .join-btn {
+  background-color: #ffdd59;
+  color: #333;
+  border: none;
+  padding: 0.4rem 1.2rem; /* Reduce padding to make the button smaller */
+  border-radius: 25px;
+  font-size: 0.9rem; /* Reduce font size for the button */
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-buttons .join-btn:hover {
+  background-color: #ffc107;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.header-buttons .join-btn:active {
+  transform: scale(0.95);
+  background-color: #ffca2c;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth Scroll Effect */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+  background: linear-gradient(90deg, #ffffff, #8dbbd5); /* White to light blue */
+
+}
+
+/* Styling for the Content Section */
+.hero-section .content {
+max-width: 50%; /* Restrict width for better readability */
+margin-left: 2rem; /* Add some space from the left */
+}
+
+.hero-section .content h1 {
+font-size: 3rem; /* Bigger heading for emphasis */
+font-weight: 700; /* Bold heading for importance */
+color: #1d74b7; /* Deep blue for professionalism */
+margin-bottom: 1rem; /* Add space below the heading */
+text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
+}
+
+.hero-section .content p {
+font-size: 1.2rem; /* Larger text for better readability */
+line-height: 1.8; /* Improve spacing between lines */
+color: #333; /* Neutral dark gray for the text */
+margin-bottom: 2rem; /* Add spacing below the paragraph */
+}
+
+.hero-section .content p::first-line {
+font-weight: bold; /* Highlight the first line for better engagement */
+}
+
+
+.hero-section .buttons a {
+  margin-right: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+/* Schedule Meeting Button */
+.schedule-meet-btn {
+background: linear-gradient(180deg, #4cafdc, #1d74b7);
+color: white;
+padding: 0.6rem 1.5rem;
+font-size: 1rem;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.schedule-meet-btn:hover {
+background: #0056b3;
+}
+
+/*Explore More section */
+.secondary-btn {
+background: white;
+color:#007bff;
+padding: 0.6rem 1.5rem;
+font-size: 1rem;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.secondary-btn {
+background: white;
+}
+
+.hero-section .primary-btn:hover,
+.hero-section .secondary-btn:hover {
+  background: #0056b3;
+  color: white;
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+.image-container {
+  position: relative;
+}
+
+.mentor-image {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.mentor-details {
+  position: absolute;
+  bottom: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover .mentor-details {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Testimonials Section */
+.testimonials {
+  padding: 3rem 2rem;
+  background: #f9f9f9;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #1d74b7;
+  margin-bottom: 2rem;
+}
+
+.testimonial-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.testimonial-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-box img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid #007bff;
+}
+
+.testimonial-box p {
+  font-size: 1rem;
+  color: #555;
+  margin: 1rem 0;
+}
+
+.testimonial-box .author {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.testimonial-box .designation {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonial-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-box {
+    max-width: 90%;
+  }
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(180deg, #4cafdc, #1d74b7); /* Light blue to deeper blue gradient */
+  color: #fff;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-section .content,
+.hero-section .image-container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Calendar Section */
+.calendar-section {
+padding: 2rem;
+text-align: center;
+background-color: #f9f9f9;
+}
+
+.calendar-section h2 {
+font-size: 2rem;
+color: #1d74b7;
+margin-bottom: 1rem;
+}
+
+.calendar-container {
+width: 80%;
+margin: 0 auto;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+overflow: hidden;
+}
+
+.calendar-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem;
+background: linear-gradient(0deg, #4cafdc, #1d74b7); /* Light blue to deeper blue gradient */
+color: white;
+}
+
+.calendar-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.nav-btn {
+background: transparent;
+color: white;
+border: none;
+font-size: 1.5rem;
+cursor: pointer;
+}
+
+.nav-btn:hover {
+transform: scale(1.2);
+}
+
+.calendar-days {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+background: #e6f2ff;
+padding: 0.5rem;
+font-weight: bold;
+}
+
+.calendar-days div {
+text-align: center;
+font-size: 1rem;
+padding: 0.5rem;
+}
+
+.calendar-dates {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+gap: 5px;
+padding: 1rem;
+background: white;
+}
+
+.calendar-dates .today {
+background:linear-gradient(180deg, #4cafdc, #1d74b7);
+color: white;
+font-weight: bold;
+}
+
+.calendar-dates .empty {
+background: transparent;
+cursor: default;
+}
+
+/* Calendar Dates */
+.calendar-dates div {
+position: relative;
+background: #f4f4f4;
+padding: 10px;
+border-radius: 5px;
+transition: all 0.3s ease-in-out;
+cursor: pointer;
+}
+
+/* Default event date style */
+.event-date {
+background: #ffd700; /* Gold for event dates */
+color: #000;
+font-weight: bold;
+border: 3px solid #ffa500;
+}
+
+/* Tooltip box */
+.tooltip {
+position: absolute;
+bottom: 120%; /* Position above the date */
+left: 50%;
+transform: translateX(-50%);
+background: white;
+color: #1d74b7;
+padding: 8px;
+border-radius: 5px;
+font-size: 0.85rem;
+white-space: nowrap;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+display: none; /* Initially hidden */
+z-index: 10;
+max-width: 300px;
+text-align: center;
+}
+
+/* Display tooltip when clicked */
+.event-date.active .tooltip {
+display: block; /* Show tooltip when the date is clicked */
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+/* Chatbox */
+.chatbox {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 320px;
+background: #fff;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+transition: all 0.3s ease-in-out;
+z-index: 1000;
+}
+
+.chatbox-header {
+background: linear-gradient(90deg, #4cafdc, #1d74b7);
+color: white;
+padding: 0.8rem 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 1.1rem;
+font-weight: bold;
+}
+
+.chatbox-header button {
+background: none;
+border: none;
+color: white;
+font-size: 1.2rem;
+cursor: pointer;
+transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.chatbox-header button:hover {
+transform: scale(1.2);
+color: #ffdddd;
+}
+
+.chatbox-body {
+flex: 1;
+padding: 1rem;
+overflow-y: auto;
+background: #f9f9f9;
+max-height: 250px;
+}
+
+.chatbox-body::-webkit-scrollbar {
+width: 6px;
+}
+
+.chatbox-body::-webkit-scrollbar-thumb {
+background: #4cafdc;
+border-radius: 10px;
+}
+
+.chatbox-body::-webkit-scrollbar-thumb:hover {
+background: #1d74b7;
+}
+
+/* Chatbox Footer */
+.chatbox-footer {
+display: flex;
+border-top: 1px solid #ddd;
+background: #fff;
+padding: 0.5rem;
+}
+
+#chat-input {
+flex: 1;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 0.5rem;
+font-size: 1rem;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+#chat-input:focus {
+border-color: #4cafdc;
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+#send-chat {
+background: linear-gradient(90deg, #4cafdc, #1d74b7);
+color: white;
+border: none;
+padding: 0.5rem 1rem;
+margin-left: 0.5rem;
+border-radius: 8px;
+font-size: 1rem;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#send-chat:hover {
+background: #1d74b7;
+transform: scale(1.05);
+}
+
+/* Chat Bubbles */
+.chat-message {
+padding: 0.5rem 0.8rem;
+margin: 0.5rem 0;
+border-radius: 10px;
+max-width: 70%;
+font-size: 0.9rem;
+line-height: 1.5;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* User Messages */
+.chat-message.user {
+background: #e1f5fe;
+align-self: flex-end;
+color: #333;
+}
+
+/* System Messages */
+.chat-message.system {
+background: #1d74b7;
+color: white;
+align-self: flex-start;
+}
+
+/* Hide Chatbox */
+.chatbox.hide {
+transform: translateY(120%);
+}
+
+/* Modal (Hidden by Default) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed;
+top: 0;
+left:0 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
+
+
+/* Modal Styles */
+.modal {
+display: none; /* Hidden by default */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
+
+.modal-content {
+background: white;
+padding: 20px;
+border-radius: 8px;
+text-align: center;
+width: 90%;
+max-width: 500px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+position: relative;
+}
+
+.close-btn {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 1.5rem;
+color: #333;
+cursor: pointer;
+}
+
+.close-btn:hover {
+color: red;
+}
+
+/* Modal Form */
+.modal-content form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 1rem;
+}
+
+.modal-content form button {
+background: #1d74b7;
+color: white;
+border: none;
+padding: 10px;
+border-radius: 5px;
+font-size: 1rem;
+cursor: pointer;
+}
+
+.modal-content form button:hover {
+background: #0056b3;
+}

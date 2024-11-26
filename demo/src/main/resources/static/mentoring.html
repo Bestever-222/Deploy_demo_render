@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Creator Mentoring</title>
+  <link rel="stylesheet" href="mentoring.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <h1>Cre8Hub Mentoring</h1>
+    </div>
+    <div class="header-buttons">
+      <a href="https://meet.google.com/znw-eaai-xnr" target="_blank">
+        <button class="join-btn" aria-label="Join Google Meet">Join</button>
+      </a>
+    </div>
+  </header>
+      
+  <main class="hero-section">
+    <div class="content">
+      <h1>We're Better Together</h1>
+      <p>
+        Join our community of content creators and mentors. Build connections,
+        learn, and grow your network in the world of content creation.
+      </p>
+      <div class="buttons">
+        <!-- Schedule Meet Button -->
+        <a href="https://meet.google.com/landing?pli=1" target="_blank">
+          <button id="schedule-meeting" class="schedule-meet-btn">Schedule Meeting</button>
+        </a>
+      
+        <!-- Explore More Button -->
+        <a href="#" target="_blank">
+          <button class="secondary-btn" aria-label="Contact us">Contact us</button>
+        </a>
+      </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Contact Us</h2>
+        <p>Email: support@example.com</p>
+        <p>Phone: +123 456 7890</p>
+        <form id="contactForm">
+          <div class="form-group">
+            <div>
+              <label for="name">Your Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+              <label for="email">Your Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <label for="message">Your Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <p id="successMessage" style="color: green; font-weight: bold; display: none;">Message sent successfully!</p>
+      </div>
+    </div>
+    
+
+    <div class="image-container">
+      <a href="profile.html" class="mentor-link">
+        <img src="assets/mentor.jpg" alt="Mentor's Profile Image" class="mentor-image">
+        <div class="mentor-details">
+          <p><strong>Bhuvan Bam</strong></p>
+          <p>Top Content Creator & Mentor</p>
+        </div>
+      </a>
+    </div>    
+  </main>
+
+    <!-- Calendar Section -->
+<section class="calendar-section">
+  <h2>Upcoming Events of Bhuvan Bam</h2>
+  <div class="calendar-container">
+      <div class="calendar-header">
+          <button id="prev-month" class="nav-btn">&lt;</button>
+          <h3 id="current-month-year"></h3>
+          <button id="next-month" class="nav-btn">&gt;</button>
+      </div>
+      <div class="calendar-days">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+      </div>
+      <div id="calendar-dates" class="calendar-dates"></div>
+  </div>
+</section>
+
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-container">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-box">
+        <img src="https://nursinginstitutegoa.org/wp-content/uploads/2016/01/tutor-8.jpg" alt="Testimonial from John Doe">
+        <p>
+          “This platform has been a game-changer for me. I’ve found amazing mentors
+          and collaborators here!”
+        </p>
+        <div class="author">John Doe</div>
+        <div class="designation">Content Creator</div>
+      </div>
+      <!-- Testimonial 2 -->
+      <div class="testimonial-box">
+        <img src="https://www.ilparksconference.com/wp-content/uploads/2014/10/speaker-2-v2.jpg" alt="Testimonial from Jane Smith">
+        <p>
+          “Cre8Hub is the perfect place for creators. It helped me connect with a mentor
+          who boosted my career!”
+        </p>
+        <div class="author">Jane Smith</div>
+        <div class="designation">Social Media Expert</div>
+      </div>
+      <!-- Testimonial 3 -->
+      <div class="testimonial-box">
+        <img src="https://salondesmaires-haut-rhin.fr/wp-content/uploads/2014/10/speaker-3.jpg" alt="Testimonial from Mike Ross">
+        <p>
+          “I’ve grown so much after joining Cre8Hub. The community is supportive and
+          inspiring.”
+        </p>
+        <div class="author">Mike Ross</div>
+        <div class="designation">Marketing Guru</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbox Section -->
+  <div class="chatbox">
+    <div class="chatbox-header">
+      <h3>Chat with mentor</h3>
+      <button id="close-chat">X</button>
+    </div>
+    <div class="chatbox-body" id="chat-body">
+      <!-- Messages will appear here -->
+    </div>
+    <div class="chatbox-footer">
+      <input type="text" id="chat-input" placeholder="Type a message...">
+      <button id="send-chat">Send</button>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <p>© 2024 Cre8Hub | All Rights Reserved</p>
+  </footer>
+
+
+  <!-- Include Google API Script First -->
+  <script src="https://apis.google.com/js/api.js"></script>
+
+  <!-- Custom Script -->
+  <script src="mentoring.js"></script>
+</body>
+</html>

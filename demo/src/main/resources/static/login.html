@@ -41,7 +41,7 @@
             // Simple validation (you can customize this logic)
             if (username === username && password === password) {
                 // Redirect to profile page
-                window.location.href = "home.html";
+                window.location.href = "logo.html";
                 return false; // Prevent form from actually submitting (since we handle redirection)
             } else {
                 alert("Invalid username or password!");
@@ -66,7 +66,7 @@
                 .then(data => {
                     if (data === "Login successful") {
                         alert("Login successful!");
-                        window.location.href = "home.html";  // Redirect on successful login
+                        window.location.href = "logo.html";  // Redirect on successful login
                     } else {
                         alert("Invalid login credentials");
                     }
@@ -79,7 +79,7 @@
         localStorage.setItem('username', username);  // Store username
         localStorage.setItem('content', content);  // Store content type
         // Redirect to the home page
-        window.location.href = "home.html";
+        window.location.href = "logo.html";
 
 
     </script>
