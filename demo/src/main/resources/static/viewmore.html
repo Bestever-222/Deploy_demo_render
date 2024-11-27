@@ -8,95 +8,400 @@
     <script defer src="viewmore.js"></script>
 </head>
 <body>
+<!-- Header Section -->
+<header class="header">
+    <div class="banner">
+        <img src="assets/banner.png" alt="Banner" class="banner-img">
+    </div>
+</header>
 
-    <!-- Header Section -->
-    <header class="header">
-        <div class="banner">
-            <img src="assets/banner.png" alt="Banner" class="banner-img">
+<!-- Main Container -->
+<div class="container">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+        <h3>My Actions</h3>
+        <div class="action-section">
+            <h4>Add to Queue</h4>
+            <div id="queue-container" class="action-container"></div>
         </div>
-    </header>
+        <div class="action-section">
+            <h4>Watch Later</h4>
+            <div id="watchlater-container" class="action-container"></div>
+        </div>
+    </aside>
 
-    <!-- Dashboard Section -->
-    <section class="dashboard">
-        <nav class="dashboard-nav">
-            <a href="#" class="nav-item" onclick="showSection('videos')">Videos</a>
-            <a href="#" class="nav-item" onclick="showSection('shorts')">Shorts</a>
-            <a href="#" class="nav-item" onclick="showSection('playlists')">Playlists</a>
-            <a href="#" class="nav-item" onclick="showSection('community')">Community</a>
-        </nav>
-    </section>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Navigation -->
+        <section class="dashboard">
+            <nav class="dashboard-nav">
+                <a href="#" class="nav-item" onclick="showSection('videos')">Videos</a>
+                <a href="#" class="nav-item" onclick="showSection('shorts')">Shorts</a>
+                <a href="#" class="nav-item" onclick="showSection('playlists')">Playlists</a>
+                <a href="#" class="nav-item" onclick="showSection('community')">Community</a>
+            </nav>
+        </section>
 
-    <!-- Video Section -->
-    <section id="videos" class="section-content">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ipsa voluptatem tempora quos suscipit fugit inventore. Omnis nobis ullam, itaque unde doloribus dolorem fugiat quisquam laudantium mollitia sit praesentium autem.</h2>
-        <div class="video-item">
-            <img src="assets/video.jpg" alt="Video Thumbnail" class="video-thumbnail">
-            <div class="video-description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic minima iste quam commodi culpa consectetur illum, earum qui ex vel voluptatem, itaque fugiat sunt temporibus sint deserunt. Explicabo, enim sequi?</p>
-                <p>173K views • 6 days ago</p>
+        <!-- Videos Section -->
+        <section id="videos" class="section-content">
+            <div class="section-header">
+                <h2>Videos</h2>
+                <button class="upload-btn" onclick="openUploadModal('videos')">Upload Video</button>
             </div>
-        </div>
-    </section>
+            <div class="videos-container">
+                <!-- Preloaded Videos -->
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/sXSYTUqFGVQ" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 1</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>10</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/sXSYTUqFGVQ')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/sXSYTUqFGVQ')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 1', 'https://www.youtube.com/embed/sXSYTUqFGVQ')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 1', 'https://www.youtube.com/embed/sXSYTUqFGVQ')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HbNfCM4ilBQ" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 2</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>20</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/HbNfCM4ilBQ')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/HbNfCM4ilBQ')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 2', 'https://www.youtube.com/embed/HbNfCM4ilBQ')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 2', 'https://www.youtube.com/embed/HbNfCM4ilBQ')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OXGznpKZ_sA" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 3</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>30</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/OXGznpKZ_sA')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/OXGznpKZ_sA')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 3', 'https://www.youtube.com/embed/OXGznpKZ_sA')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 3', 'https://www.youtube.com/embed/OXGznpKZ_sA')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/4WjtQjPQGIs" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 4</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>40</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/4WjtQjPQGIs')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/4WjtQjPQGIs')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 4', 'https://www.youtube.com/embed/4WjtQjPQGIs')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 4', 'https://www.youtube.com/embed/4WjtQjPQGIs')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/PkZNo7MFNFg" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 5</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>30</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/PkZNo7MFNFg')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/PkZNo7MFNFg')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 5', 'https://www.youtube.com/embed/PkZNo7MFNFg')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 5', 'https://www.youtube.com/embed/PkZNo7MFNFg')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/kqtD5dpn9C8" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Video 6</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>90</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/kqtD5dpn9C8')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/kqtD5dpn9C8')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Video 6', 'https://www.youtube.com/embed/kqtD5dpn9C8')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Video 6', 'https://www.youtube.com/embed/kqtD5dpn9C8')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Shorts Section -->
-<section id="shorts" class="section-content">
-    <h2>Popular Shorts</h2>
-    <div class="shorts-container">
-        <div class="short-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
-            <p class="short-title">Complete DSA series on YouTube by Shradha</p>
-            <p class="short-views">387K views</p>
+        <!-- Shorts Section -->
+        <section id="shorts" class="section-content" style="display: none;">
+            <div class="section-header">
+                <h2>Shorts</h2>
+                <button class="upload-btn" onclick="openUploadModal('shorts')">Upload Short</button>
+            </div>
+            <div class="shorts-container">
+                <!-- Preloaded Shorts -->
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/X-cdWlx7hQI" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 1</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>5</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/X-cdWlx7hQI')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/X-cdWlx7hQI')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 1', 'https://www.youtube.com/embed/X-cdWlx7hQI')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 1', 'https://www.youtube.com/embed/X-cdWlx7hQI')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/W-8j4MrsX2s" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 2</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>20</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/W-8j4MrsX2s')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/W-8j4MrsX2s')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 2', 'https://www.youtube.com/embed/W-8j4MrsX2s')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 2', 'https://www.youtube.com/embed/W-8j4MrsX2s')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/u94HY6hhXls" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 3</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>50</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/u94HY6hhXls')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/u94HY6hhXls')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 3', 'https://www.youtube.com/embed/u94HY6hhXls')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 3', 'https://www.youtube.com/embed/u94HY6hhXls')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/o-DxBShJGE8" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 4</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>35</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/o-DxBShJGE8')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/o-DxBShJGE8')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 4', 'https://www.youtube.com/embed/o-DxBShJGE8')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 4', 'https://www.youtube.com/embed/o-DxBShJGE8')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/KfGogAKikp8" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 5</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>550</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/KfGogAKikp8')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/KfGogAKikp8')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 5', 'https://www.youtube.com/embed/KfGogAKikp8')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 5', 'https://www.youtube.com/embed/KfGogAKikp8')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="200" height="315" src="https://www.youtube.com/embed/VWVqeFhvAH8" allowfullscreen></iframe>
+                    <div class="video-description half-length">
+                        <h3>Short 6</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>90</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/VWVqeFhvAH8')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/VWVqeFhvAH8')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Short 6', 'https://www.youtube.com/embed/VWVqeFhvAH8')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Short 6', 'https://www.youtube.com/embed/VWVqeFhvAH8')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playlists Section -->
+        <section id="playlists" class="section-content" style="display: none;">
+            <div class="section-header">
+                <h2>Playlists</h2>
+                <button class="upload-btn" onclick="openUploadModal('playlists')">Upload Playlist</button>
+            </div>
+            <div class="playlists-container">
+                <!-- Preloaded Playlists -->
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Playlist 1</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>15</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/videoseries?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/videoseries?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Playlist 1', 'https://www.youtube.com/embed/videoseries?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Playlist 1', 'https://www.youtube.com/embed/videoseries?list=PLu0W_9lII9agwh1XjRt242xIpHhPT2llg')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW" allowfullscreen></iframe>
+                    <div class="video-description">
+                        <h3>Playlist 2</h3>
+                        <p>Uploaded by <strong>Admin</strong></p>
+                        <div class="video-actions">
+                            <button class="like-btn" onclick="likeVideo(this)">👍 <span>100</span></button>
+                            <button class="share-btn" onclick="shareVideo('https://www.youtube.com/embed/videoseries?list=PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW')">Share</button>
+                            <button class="download-btn" onclick="downloadVideo('https://www.youtube.com/embed/videoseries?list=PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW')">Download</button>
+                        </div>
+                        <div class="three-dots-menu">
+                            <button onclick="toggleOptions(this)">...</button>
+                            <div class="options-menu">
+                                <button onclick="addToQueue('Playlist 2', 'https://www.youtube.com/embed/videoseries?list=PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW')">Add to Queue</button>
+                                <button onclick="addToWatchLater('Playlist 2', 'https://www.youtube.com/embed/videoseries?list=PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW')">Watch Later</button>
+                                <button onclick="deleteIframe(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!--Community Section -->
+<section id="community" class="section-content" style="display: none;">
+    <!-- Catchy Heading -->
+    <h2 class="community-heading">Welcome to the Community</h2>
+    <p class="community-subheading">Connect with others, share your thoughts, and discover ideas!</p>
+
+    <!-- Community Posts -->
+    <div id="communityPosts" class="community-posts">
+        <!-- Dummy Posts -->
+        <div class="community-post">
+            <p>Payal: This platform is amazing! Loving the networking features. 🎉</p>
+            <small>2 hours ago</small>
         </div>
-        <div class="short-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
-            <p class="short-title">How should Software Engineers plan their career?</p>
-            <p class="short-views">224K views</p>
+        <div class="community-post">
+            <p>Shruti: Does anyone have tips for organizing projects effectively? 🤔</p>
+            <small>5 hours ago</small>
         </div>
-        <div class="short-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
-            <p class="short-title">Major Issue for students! For Jobs, Degree, Skills</p>
-            <p class="short-views">1.7M views</p>
+        <div class="community-post">
+            <p>Anjali: Just posted a new video tutorial. Check it out in the Videos section! 📹</p>
+            <small>1 day ago</small>
         </div>
-        <div class="short-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
-            <p class="short-title">Statically & Dynamically Typed Languages</p>
-            <p class="short-views">1M views</p>
+        <div class="community-post">
+            <p>Samiksha: Just started learning JavaScript. Any tips for beginners? 😊</p>
+            <small>1 week ago</small>
         </div>
-        <div class="short-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5e3LgLPrlEXxzoFKW6JiKd_FoCoSGQlh3GQ&s" alt="Short Thumbnail" class="short-thumbnail">
-            <p class="short-title">Is DSA Compulsory? #tech #coding</p>
-            <p class="short-views">877K views</p>
-        </div>
+    </div>
+
+    <!-- Post Input Box -->
+    <div class="community-container">
+        <textarea id="communityInput" placeholder="Post something..." rows="3"></textarea>
+        <button class="post-btn" onclick="postToCommunity()">Post</button>
     </div>
 </section>
 
 
-    <!-- Playlists Section -->
-    <section id="playlists" class="section-content" style="display: none;">
-        <h2>Top Playlists</h2>
-        <div class="playlist-item">
-            <img src="assets/video.jpg" alt="Playlist Thumbnail" class="playlist-thumbnail">
-            <div class="playlist-description">
-                <p>Learn Full Stack Development
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem porro sed quo velit labore expedita harum nulla repellat, magni ut aut omnis cum blanditiis id consectetur quod! Enim, vel fugit!
-                </p>
-                <p>20 videos • Updated 2 weeks ago</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section id="community" class="section-content" style="display: none;">
-        <h2>Community Posts</h2>
-        <div class="community-post">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Here's an update from our community 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid distinctio harum at alias consectetur iusto asperiores necessitatibus minima fugiat adipisci tempora quia voluptatum maxime cumque, ipsam facere eum corrupti nisi.
-            </p>
-            <div class="post-stats">
-                <p>5K likes • 200 comments</p>
-            </div>
-        </div>
-    </section>
-
+<!-- Upload Modal -->
+<div id="uploadModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Upload Content</h3>
+        <input type="file" id="fileInput">
+        <input type="text" id="urlInput" placeholder="Or paste a YouTube URL">
+        <input type="text" id="descriptionInput" placeholder="Enter a description">
+        <button onclick="uploadContent()">Upload</button>
+        <button onclick="closeModal()">Cancel</button>
+    </div>
+</div>
 </body>
 </html>
