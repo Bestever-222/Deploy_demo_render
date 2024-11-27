@@ -1,3 +1,4 @@
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,51 +7,92 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #f9f9f9;
     color: #333;
-    line-height: 1.6;
-    padding-bottom: 50px;
 }
 
+/* Header */
 .header {
     background-color: #0073e6;
-    padding: 30px 10px;
     text-align: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-bottom: 3px solid #005bb5;
-}
-
-.banner {
-    width: 80%;
-    max-width: 1200px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    padding: 20px 0;
 }
 
 .banner-img {
     width: 100%;
-    height: auto;
-    max-height: 300px;
+    max-height: 250px;
     object-fit: cover;
 }
 
-.dashboard {
-    margin: 30px auto;
-    max-width: 1200px;
+/* Main Container */
+.container {
+    display: flex;
+    margin: 20px;
+    gap: 20px;
 }
 
+/* Sidebar */
+.sidebar {
+    width: 300px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.sidebar h3 {
+    margin-bottom: 30px;
+}
+
+/* Increase spacing between "Add to Queue" and "Watch Later" sections */
+.action-section {
+    margin-bottom: 20px; /* Adjust the value for more or less space */
+}
+
+/* Hide Sidebar in Community Section */
+.container.community-active .sidebar {
+    display: none;
+}
+
+
+.action-container {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.action-container div {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.action-container div a {
+    text-decoration: none;
+    color: #0073e6;
+}
+
+.action-container div:hover {
+    background-color: #eef;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+}
+
+/* Navigation */
 .dashboard-nav {
     display: flex;
     justify-content: space-around;
     background-color: #0073e6;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .nav-item {
@@ -65,96 +107,334 @@ body {
     background-color: #005bb5;
 }
 
+/* Section Content */
 .section-content {
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-    max-width: 1200px;
-    margin: 20px auto;
-}
-
-.video-item, .short-item, .playlist-item, .community-post {
-    display: flex;
-    align-items: center;
-    background-color: white;
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.video-thumbnail, .short-thumbnail, .playlist-thumbnail {
-    width: 200px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Shorts Section */
-.shorts-container {
+.section-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Upload Button */
+.upload-btn {
+    background-color: #0073e6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: #005bb5;
+}
+
+/* Videos and Shorts Containers */
+.videos-container,
+.shorts-container,
+.playlists-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    padding-bottom: 20px;
-    scroll-behavior: smooth; /* Smooth scrolling for a better experience */
 }
 
-.short-item {
-    background-color: #2e2e2e; /* Darker background for contrast */
-    padding: 10px;
-    width: 160px;
-    border-radius: 12px; /* Rounded corners */
-    text-align: center;
-    flex-shrink: 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+.iframe-wrapper {
+    width: 48%;
+    position: relative;
 }
 
-.short-item:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
-}
-
-.short-thumbnail {
+.iframe-wrapper iframe {
     width: 100%;
-    height: 250px; /* Increased height for better visuals */
     border-radius: 10px;
-    object-fit: cover;
+}
+
+/* Video Description */
+.video-description {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-description h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.video-description p {
+    font-size: 0.9rem;
+    color: #666;
     margin-bottom: 10px;
 }
 
-.short-title {
-    font-size: 16px; /* Larger title font size */
-    color: white;
-    margin-bottom: 5px;
-    font-weight: 600; /* Bold titles */
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+/* Video Actions */
+.video-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.short-views {
-    font-size: 14px;
-    color: #aaa;
+.video-actions button {
+    background: #f1f1f1;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
 }
 
-/* Scrollbar Styling */
-.shorts-container::-webkit-scrollbar {
-    height: 8px;
+.video-actions button:hover {
+    background: #ddd;
 }
 
-.shorts-container::-webkit-scrollbar-thumb {
-    background-color: #0073e6; /* Custom scrollbar color */
+.like-btn span {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* Options Menu */
+.three-dots-menu {
+    position: relative;
+    display: inline-block;
+    text-align: right;
+}
+
+.three-dots-menu button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 10;
+    width: 150px;
+}
+
+.options-menu button {
+    display: block;
+    background: none;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.options-menu button:hover {
+    background: #f9f9f9;
+}
+
+.three-dots-menu:hover .options-menu {
+    display: block;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .iframe-wrapper {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #communityInput {
+            width: 100%; /* Full width on smaller screens */
+        }
+}
+
+/* Community Section */
+.community-container {
+    background: #fff;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+    position: relative; /* To position the post button */
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .short-thumbnail {
-        height: 200px; /* Smaller thumbnails on mobile */
-    }
+/* Catchy Heading */
+.community-heading {
+    font-size: 1.8rem;
+    color: #0073e6;
+    margin-bottom: 10px;
+    text-align: center;
+}
 
-    .short-item {
-        width: 130px;
-    }
+.community-subheading {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Dummy Posts */
+.community-posts {
+    margin-bottom: 20px;
+}
+
+.community-post {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.community-post p {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.community-post small {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+/* Chat Box */
+#communityInput {
+    width: 95%; /* Spans most of the screen width */
+    height: 100px; /* Larger height for input box */
+    padding: 20px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.post-btn {
+    background-color: #0073e6;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.post-btn:hover {
+    background-color: #005bb5;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #0073e6;
+    color: #fff;
+}
+
+.modal-content button:hover {
+    background-color: #005bb5;
+}
+
+/* Shorts-specific iframe styles */
+.shorts-container .iframe-wrapper iframe {
+    width: 200px;
+    height: 315px;
+}
+
+/* Playlists-specific iframe styles */
+.playlists-container .iframe-wrapper iframe {
+    width: 560px;
+    height: 315px;
+}
+
+/* Ensure consistency for dynamically added content */
+.iframe-wrapper {
+    margin-bottom: 20px;
+}
+
+/* Shorts container flex layout */
+.shorts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.shorts-container .iframe-wrapper {
+    flex: 1 1 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+    min-width: 200px;
+    box-sizing: border-box;
+}
+
+/* Playlists container flex layout */
+.playlists-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.playlists-container .iframe-wrapper {
+    flex: 1 1 100%;
+    max-width: 100%;
 }
