@@ -1,0 +1,76 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling while splash screen is visible */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Splash Screen Styles */
+.splash-screen {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Stack items vertically */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff, #0099ff); /* White and Blue Gradient Background */
+    animation: gradientShift 10s ease-in-out infinite alternate; /* Animation for background shift */
+}
+
+/* Background Animation */
+@keyframes gradientShift {
+    0% {
+        background: linear-gradient(135deg, #ffffff, #0099ff);
+    }
+    100% {
+        background: linear-gradient(135deg, #0099ff, #ffffff);
+    }
+}
+
+/* Logo Styles */
+.nav-logo {
+    width: 180px; /* Slightly larger logo */
+    height: 180px; /* Keep it proportional */
+    border-radius: 20px; /* Rounded corners instead of fully round */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
+    animation: fadeInZoom 2.5s ease-in-out forwards; /* Smooth fade-in and zoom */
+    margin-bottom: 20px; /* Add space below the logo */
+}
+
+/* Welcome Text Styles */
+.welcome-text {
+    color: #003366; /* Deep blue for contrast */
+    font-size: 2.5rem; /* Larger font size for impact */
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 3.5s ease-in-out forwards; /* Delay the text fade-in slightly */
+}
+
+/* Fade-in and Zoom Animation for Logo */
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade-in Animation for Welcome Text */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Small movement upwards */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
