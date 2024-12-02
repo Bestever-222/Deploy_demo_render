@@ -18,12 +18,54 @@
                 <li><a href="explore.html">Explore</a></li>
                 <li><a href="categories.html">Categories</a></li>
                 <li><a href="mentoring.html">Mentorship</a></li>
-                <li><a href="notifications.html">Notifications</a></li>
             </ul>
         </div>
         <div class="nav-right">
             <input type="text" placeholder="Search..." class="search-bar">
-            <img src="assets/profile.jpg" alt="Profile" class="profile-icon"> <!-- Replace 'profile.jpg' with the actual profile image -->
+            <!-- Notification bell icon -->
+            <div class="notification-center">
+                <button id="notification-bell">
+                    <img src="assets/bell-icon.jpg" alt="Notifications" class="notification-icon">
+                    <span id="notification-badge" class="notification-badge">5</span>
+                </button>
+                <div id="notification-panel" class="notification-panel hidden">
+                    <div class="panel-header">
+                        <h3>Notifications</h3>
+                    </div>
+                    <ul class="notification-list">
+                        <li class="notification-item unread" data-read="false">
+                            <div class="notification-content">
+                                <span class="notification-title bold">New Follower</span>
+                                <p class="notification-body">John Doe started following you.</p>
+                            </div>
+                        </li>
+                        <li class="notification-item unread" data-read="false">
+                            <div class="notification-content">
+                                <span class="notification-title bold">Mentorship Request</span>
+                                <p class="notification-body">Jane Smith accepted your mentorship request.</p>
+                            </div>
+                        </li>
+                        <li class="notification-item unread" data-read="false">
+                            <div class="notification-content">
+                                <span class="notification-title bold">Upcoming Event</span>
+                                <p class="notification-body">Content Creator Workshop tomorrow.</p>
+                            </div>
+                        </li>
+                        <li class="notification-item unread" data-read="false">
+                            <div class="notification-content">
+                                <span class="notification-title bold">New Comment</span>
+                                <p class="notification-body">"Amazing post!" on your latest article.</p>
+                            </div>
+                        </li>
+                        <li class="notification-item unread" data-read="false">
+                            <div class="notification-content">
+                                <span class="notification-title bold">Mentor Feedback</span>
+                                <p class="notification-body">Feedback from your mentor: Excellent progress.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -40,19 +82,20 @@
         <div class="profile-info">
             <h2 id="username">Riya</h2> <!-- Add id for JavaScript targeting -->
             <p id="content">Comedy content creator</p> <!-- Add id for content type -->
-        </div>
-    
-        <div class="friends-list">
-            <h3>Friends</h3>
-            <button class="friend">Abhishek</button>
-            <button class="friend">Samay</button>
-            <button class="friend">Akash</button>
+            <div class="divider"></div>
         </div>
           <!-- Mentorship Button -->
         <div class="mentorship-section">
-        <button id="mentorshipButton" class="mentorship-btn">Level Up with Mentors</button>
-    </div>
-      
+        <button id="mentorshipButton" class="home-btn">Level Up with Mentors</button>
+        </div>
+     
+        <div class="network-section">
+            <button id="networkButton" class="home-btn">Connect & Grow</button>
+        </div>
+        
+        <div class="bottom-icon">
+            <button id="bottomPlusIcon">+</button> <!-- New Plus Icon -->
+        </div>
     </div>
 
     <!-- Central Content Area -->
@@ -99,15 +142,38 @@
         </div>
     </div>
 
-    <!-- Right Sidebar for Chats -->
     <div class="sidebar-right">
+        <!-- Search Bar -->
         <div class="search-chat">
-            <input type="text" placeholder="Search a friend to chat">
+            <input type="text" id="searchChat" placeholder="Search a friend to chat">
         </div>
-        <div class="chat-box">
-            <p class="placeholder-text">Let's have a chat with your friend</p>
+     
+     
+        <!-- Chat List -->
+        <div id="chatList" class="chat-list">
+            <!-- Friend connections will dynamically render here -->
         </div>
-    </div>
+     
+     
+        <!-- Chat Window -->
+        <div id="chatWindow" class="chat-window" style="display: none;">
+            <div class="chat-header">
+                <button id="backToChatList" style="background: none; border: none; color: #007bff; cursor: pointer;">← Back</button>
+                <div>
+                    <h3 id="chatUserName"></h3>
+                    <p id="chatUserField"></p>
+                </div>
+            </div>
+            <div id="chatBody" class="chat-body">
+                <!-- Chat messages will render here -->
+            </div>
+            <div class="chat-footer">
+                <textarea id="chatInput" placeholder="Write a message..."></textarea>
+                <button id="sendMessage">Send</button>
+            </div>
+        </div>
+     </div>
+     
 </div>
 
 <script src="home.js"></script>
