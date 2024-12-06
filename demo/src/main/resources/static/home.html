@@ -16,9 +16,8 @@
             <ul class="nav-links">
                 <li><a href="home.html">Home</a></li>
                 <li><a href="explore.html">Explore</a></li>
-                <li><a href="categories.html">Categories</a></li>
                 <li><a href="mentoring.html">Mentorship</a></li>
-                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="network.html">Notifications</a></li>
             </ul>
         </div>
         <div class="nav-right">
@@ -41,18 +40,15 @@
             <h2 id="username">Riya</h2> <!-- Add id for JavaScript targeting -->
             <p id="content">Comedy content creator</p> <!-- Add id for content type -->
         </div>
-    
-        <div class="friends-list">
-            <h3>Friends</h3>
-            <button class="friend">Abhishek</button>
-            <button class="friend">Samay</button>
-            <button class="friend">Akash</button>
-        </div>
           <!-- Mentorship Button -->
         <div class="mentorship-section">
         <button id="mentorshipButton" class="mentorship-btn">Level Up with Mentors</button>
-    </div>
-      
+        </div>
+        <!-- Network Button -->
+        <div class="network-section">
+            <button id="networkButton" class="network-btn">Connect & Grow</button>
+        </div>
+
     </div>
 
     <!-- Central Content Area -->
@@ -99,13 +95,34 @@
         </div>
     </div>
 
-    <!-- Right Sidebar for Chats -->
+    <!-- Chat Section -->
     <div class="sidebar-right">
+        <!-- Search Bar -->
         <div class="search-chat">
-            <input type="text" placeholder="Search a friend to chat">
+            <input type="text" id="searchChat" placeholder="Search a friend to chat">
         </div>
-        <div class="chat-box">
-            <p class="placeholder-text">Let's have a chat with your friend</p>
+
+        <!-- Chat List -->
+        <div id="chatList" class="chat-list">
+            <!-- Friend connections will dynamically render here -->
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chatWindow" class="chat-window" style="display: none;">
+            <div class="chat-header">
+                <button id="backToChatList" style="background: none; border: none; color: #007bff; cursor: pointer;">← Back</button>
+                <div>
+                    <h3 id="chatUserName"></h3>
+                    <p id="chatUserField"></p>
+                </div>
+            </div>
+            <div id="chatBody" class="chat-body">
+                <!-- Chat messages will render here -->
+            </div>
+            <div class="chat-footer">
+                <textarea id="chatInput" placeholder="Write a message..."></textarea>
+                <button id="sendMessage">Send</button>
+            </div>
         </div>
     </div>
 </div>

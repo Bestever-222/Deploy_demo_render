@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Content Creators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+<header>
+    <h1>Explore Cre8hub</h1>
+    <p>Your hub for creativity and collaboration</p>
+</header>
+
+<section class="content-creators">
+    <h2>Categories</h2>
+    <div class="scroll-container">
+        <button class="scroll-arrow left" id="scrollLeft">&lt;</button>
+        <div class="scroll-content">
+            <div class="creator-card" data-category="blogger">
+                <div class="circle">
+                    <img src="assets/blogger.webp" alt="Bloggers">
+                </div>
+                <p>Bloggers</p>
+            </div>
+            <div class="creator-card" data-category="vlogger">
+                <div class="circle">
+                    <img src="assets/vlogger.webp" alt="Vloggers">
+                </div>
+                <p>Vloggers</p>
+            </div>
+            <div class="creator-card" data-category="podcaster">
+                <div class="circle">
+                    <img src="assets/podcaster.webp" alt="Podcasters">
+                </div>
+                <p>Podcasters</p>
+            </div>
+            <div class="creator-card" data-category="photographers">
+                <div class="circle">
+                    <img src="assets/photographers.webp" alt="Photographers">
+                </div>
+                <p>Photographers</p>
+            </div>
+            <div class="creator-card" data-category="writer">
+                <div class="circle">
+                    <img src="assets/writer.webp" alt="Writers">
+                </div>
+                <p>Writers/ Authors</p>
+            </div>
+            <div class="creator-card" data-category="social">
+                <div class="circle">
+                    <img src="assets/social.webp" alt="Social Media Influencers">
+                </div>
+                <p>Social Media Influencers</p>
+            </div>
+            <div class="creator-card" data-category="streamers">
+                <div class="circle">
+                    <img src="assets/streamers.webp" alt="Streamers">
+                </div>
+                <p>Streamers</p>
+            </div>
+            <div class="creator-card" data-category="graphic">
+                <div class="circle">
+                    <img src="assets/graphic.webp" alt="Graphic Designers">
+                </div>
+                <p>Graphic Designers/ Digital Artists</p>
+            </div>
+            <div class="creator-card" data-category="memers">
+                <div class="circle">
+                    <img src="assets/memer.webp" alt="Memers">
+                </div>
+                <p>Memers</p>
+            </div>
+            <div class="creator-card" data-category="educational">
+                <div class="circle">
+                    <img src="assets/edu.webp" alt="Educational Content Creators">
+                </div>
+                <p>Educational Content Creators</p>
+            </div>
+            <div class="creator-card" data-category="music">
+                <div class="circle">
+                    <img src="assets/music.webp" alt="Musicians">
+                </div>
+                <p>Musicians/ Music Producers</p>
+            </div>
+            <div class="creator-card" data-category="fitness">
+                <div class="circle">
+                    <img src="assets/fit.webp" alt="Fitness Coaches">
+                </div>
+                <p>Fitness/ Health Coaches</p>
+            </div>
+            <div class="creator-card" data-category="animation">
+                <div class="circle">
+                    <img src="assets/animation.webp" alt="Animators">
+                </div>
+                <p>Animators</p>
+            </div>
+            <div class="creator-card" data-category="news-creators">
+                <div class="circle">
+                    <img src="assets/news.webp" alt="Journalists">
+                </div>
+                <p>Journalists/ News Creators</p>
+            </div>
+        </div>
+        <button class="scroll-arrow right" id="scrollRight">&gt;</button>
+    </div>
+</section>
+
+<section id="category-info" class="hidden">
+    <div class="content-layout">
+        <!-- Left Column -->
+        <div class="content-info">
+            <h2 id="selected-category" class="animated-title"></h2>
+            <div class="info-box">
+                <p id="category-description"></p>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="top-creators-section">
+            <h3 id="top-creators-heading" class="animated-title">Top Content Creators</h3>
+            <div class="top-creators">
+                <div class="creator-box" id="creator1">
+                    <span class="badge"></span> <!-- Badge element must exist -->
+                    <div class="circle">
+                        <img src="assets/placeholder.webp" alt="Creator 1">
+                    </div>
+                    <p class="creator-name">Joe Rogan</p>
+                    <p class="creator-type">Interview and Discussion Podcaster</p>
+                </div>
+
+                <div class="creator-box" id="creator2">
+                    <span class="badge"></span> <!-- Badge element must exist -->
+                    <div class="circle">
+                        <img src="assets/placeholder.webp" alt="Creator 2">
+                    </div>
+                    <p class="creator-name">Crime Junkie</p>
+                    <p class="creator-type">True Crime Podcast Creators</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--Import Canvas Confetti Library (Add this script in your HTML for reference)-->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script src="explore.js"></script>
+</body>
+</html>

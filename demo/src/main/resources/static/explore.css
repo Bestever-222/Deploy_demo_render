@@ -1,0 +1,389 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+/* Top Bar Styling */
+header {
+    background: linear-gradient(to right, #007acc, #62aadc); /* Gradient theme for top bar */
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column; /* Stack the title and subtitle vertically */
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+    transition: box-shadow 0.3s ease; /* Smooth hover animation */
+}
+
+header:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+/* Section for Categories */
+.content-creators {
+    padding: 20px 10%;
+    text-align: left;
+}
+
+.content-creators h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Scrollable Container */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.scroll-content {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hide scrollbar */
+    padding: 20px;
+    width: 100%;
+}
+
+.scroll-content::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+/* Category Card */
+.creator-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 180px; /* Adjust width of each box */
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animation */
+}
+
+.creator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
+}
+
+/* Circle with Image */
+.circle {
+    position: relative
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f3f3f3;
+    transition: transform 0.3s ease-in-out;
+}
+
+.circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.creator-card p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007acc;
+    margin: 10px 0 0;
+}
+
+/* Scroll Arrows */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.scroll-arrow.left {
+    left: -60px;
+}
+
+.scroll-arrow.right {
+    right: -60px;
+}
+
+.scroll-arrow:hover {
+    background-color: #005fa3;
+    transform: scale(1.1); /* Enlarges slightly on hover */
+}
+
+/* Section for Categories */
+.content-creators {
+    padding: 20px 10%;
+    text-align: left;
+}
+
+.content-creators h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Scrollable Container */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.scroll-content {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 20px;
+    width: 100%;
+}
+
+.scroll-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Category Info Section */
+#category-info {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: justify;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+#selected-category {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007acc;
+}
+
+.info-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#category-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+#category-description::after {
+    content: attr(data-quote);
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* Right Column: Top Creators Section */
+.top-creators-section {
+    width: 50%;
+    text-align: center;
+    position: relative
+}
+
+#top-creators-heading {
+    margin-top: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px
+}
+
+/* Top Content Creators Section */
+.top-creators {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+/* Creator Box */
+.creator-box {
+    position: relative; /* Required for positioning .badge */
+    background: white;
+    border-radius: 10px;
+    width: 180px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+/* Badge Styling */
+.badge {
+    position: absolute;
+    top: -10px; /* Adjust the position to top-left corner */
+    left: -10px;
+    width: 50px; /* Badge size */
+    height: 50px;
+    background-size: contain; /* Ensures the badge image scales properly */
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2; /* Ensures it appears above other elements */
+}
+
+/* Specific Styles for Each Badge */
+#creator1 .badge {
+    background-image: url('assets/first_badge.png'); /* Correct path for the 1st badge */
+}
+
+#creator2 .badge {
+    background-image: url('assets/second_badge.png'); /* Correct path for the 2nd badge */
+}
+
+.creator-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.creator-box .circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f3f3f3;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.creator-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.creator-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #007acc;
+}
+
+.creator-type {
+    font-size: 12px;
+    color: #555;
+}
+
+/* Two-column Layout */
+.content-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 10%;
+    gap: 20px;
+}
+/* Left Column: Information Box */
+.content-info {
+    width: 45%;
+}
+
+/* Animated Titles */
+.animated-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007acc;
+    margin-bottom: 20px
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}}
+
+
+/* Confetti Effect Placeholder */
+.confetti {
+    animation: confettiExplosion 1s ease-in-out forwards;
+}
+
+/* Confetti Animation */
+@keyframes confettiBlast {
+    from {
+         transform: scale(1);
+         opacity: 1;
+    }
+    to {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.confetti.blast img {
+    animation: confettiBlast 0.7s ease-in-out forwards;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
