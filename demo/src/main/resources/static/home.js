@@ -8,7 +8,6 @@ document.getElementById("uploadPhoto").addEventListener("change", function (even
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            // Update the profile image
             const profileImage = document.getElementById("profileImage");
             profileImage.src = e.target.result;
 
@@ -19,13 +18,13 @@ document.getElementById("uploadPhoto").addEventListener("change", function (even
     }
 });
 
-// On page load, check if profile image exists in localStorage
 document.addEventListener("DOMContentLoaded", function () {
     const savedProfileImage = localStorage.getItem("profileImage");
     if (savedProfileImage) {
         document.getElementById("profileImage").src = savedProfileImage;
     }
 });
+
 // Reset to Default Profile Image After Refresh
 window.addEventListener("beforeunload", function () {
     // Clear the uploaded profile image from localStorage when refreshing
@@ -225,49 +224,10 @@ document.getElementById("profileImage").addEventListener("click", function () {
 document.getElementById("mentorshipButton").addEventListener("click", function () {
     window.location.href = "mentoring.html"; // Replace with the correct path to your mentorship page
 });
-
-
-
-//for notification bell icon
-document.addEventListener("DOMContentLoaded", () => {
-    const notificationBell = document.getElementById("notification-bell");
-    const notificationPanel = document.getElementById("notification-panel");
-    const notificationItems = document.querySelectorAll(".notification-item");
-    const notificationBadge = document.getElementById("notification-badge");
-
-    // Toggle the notification panel
-    notificationBell.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent click event from propagating
-        notificationPanel.classList.toggle("visible");
-    });
-
-    // Close the notification panel when clicking outside
-    document.addEventListener("click", (event) => {
-        if (!notificationBell.contains(event.target) && !notificationPanel.contains(event.target)) {
-            notificationPanel.classList.remove("visible");
-        }
-    });
-
-    // Handle clicking on a notification
-    notificationItems.forEach((item) => {
-        item.addEventListener("click", () => {
-            if (item.getAttribute("data-read") === "false") {
-                item.classList.remove("unread");
-                item.classList.add("read");
-                item.setAttribute("data-read", "true");
-
-                // Update the notification badge count
-                let unreadCount = parseInt(notificationBadge.innerText, 10);
-                unreadCount = unreadCount > 0 ? unreadCount - 1 : 0;
-                notificationBadge.innerText = unreadCount;
-
-                // Hide the badge if all notifications are read
-                if (unreadCount === 0) {
-                    notificationBadge.style.display = "none";
-                }
-            }
-        });
-    });
+// Ensure the button redirects to the "network.html" page
+document.getElementById("networkButton").addEventListener("click", function () {
+    console.log("Connect & Grow button clicked!"); // Debug log
+    window.location.href = "network.html"; // Ensure the file path is correct
 });
 
 // Chat Section
@@ -288,11 +248,10 @@ const defaultConnections = [
     { name: "Samiksha Nankar", field: "Memer" },
     { name: "Anjali Tiwary", field: "Musician" },
     { name: "Payal Nikam", field: "Playback Singer" },
- ];
- 
- 
- // Chat responses
- const chatResponses = {
+];
+
+// Chat responses
+const chatResponses = {
     greeting: [
         "Hey there! How’s it going?",
         "Hi! Ready to brainstorm ideas?",
@@ -375,20 +334,17 @@ const defaultConnections = [
         "Take care and stay inspired!",
         "Catch you later! Keep up the great work!",
     ],
- };
- 
- 
- // Get a random response
- function getRandomResponse(responseArray) {
+};
+
+// Get a random response
+function getRandomResponse(responseArray) {
     return responseArray[Math.floor(Math.random() * responseArray.length)];
- }
- 
- 
- // Determine the response for a message
- function getChatResponse(message) {
+}
+
+// Determine the response for a message
+function getChatResponse(message) {
     const lowerCaseMessage = message.toLowerCase();
- 
- 
+
     if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
         return getRandomResponse(chatResponses.greeting);
     } else if (
@@ -418,19 +374,17 @@ const defaultConnections = [
     } else {
         return getRandomResponse(chatResponses.general); // General fallback
     }
- }
- 
- 
- // Initialize chat functionality
- function initializeChat() {
+}
+
+// Initialize chat functionality
+function initializeChat() {
     const chatList = document.getElementById("chatList");
     const chatWindow = document.getElementById("chatWindow");
     const chatBody = document.getElementById("chatBody");
     const chatInput = document.getElementById("chatInput");
     const sendMessageButton = document.getElementById("sendMessage");
     const backToChatListButton = document.getElementById("backToChatList");
- 
- 
+
     // Render the default connections in the chat list
     function renderConnections(connections) {
         chatList.innerHTML = ""; // Clear the previous list
@@ -445,8 +399,7 @@ const defaultConnections = [
             chatList.appendChild(connectionDiv);
         });
     }
- 
- 
+
     // Open a chat window for a specific connection
     function openChat(connection) {
         chatList.style.display = "none";
@@ -455,8 +408,7 @@ const defaultConnections = [
         document.getElementById("chatUserField").textContent = connection.field;
         chatBody.innerHTML = `<p class="placeholder-text">Start a conversation with ${connection.name}</p>`;
     }
- 
- 
+
     // Add a message to the chat body
     function addMessage(message, sender) {
         const messageBubble = document.createElement("div");
@@ -465,25 +417,21 @@ const defaultConnections = [
         chatBody.appendChild(messageBubble);
         chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
     }
- 
- 
+
     // Handle sending a message
     sendMessageButton.addEventListener("click", () => {
         const message = chatInput.value.trim();
         if (message) {
             // Add the user's message
             addMessage(message, "user");
- 
- 
+
             // Remove placeholder
             const placeholder = chatBody.querySelector(".placeholder-text");
             if (placeholder) placeholder.remove();
- 
- 
+
             // Clear the input field
             chatInput.value = "";
- 
- 
+
             // Simulate a response with a delay
             setTimeout(() => {
                 const response = getChatResponse(message);
@@ -491,15 +439,13 @@ const defaultConnections = [
             }, 1000);
         }
     });
- 
- 
+
     // Go back to the chat list
     backToChatListButton.addEventListener("click", () => {
         chatWindow.style.display = "none";
         chatList.style.display = "flex";
     });
- 
- 
+
     // Search chat connections dynamically
     const searchChat = document.getElementById("searchChat");
     searchChat.addEventListener("input", () => {
@@ -509,13 +455,11 @@ const defaultConnections = [
         );
         renderConnections(filteredConnections);
     });
- 
- 
+
     // Initial render of connections
     renderConnections(defaultConnections);
- }
- 
- 
- // Initialize on page load
- document.addEventListener("DOMContentLoaded", initializeChat);
- 
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", initializeChat);
+
