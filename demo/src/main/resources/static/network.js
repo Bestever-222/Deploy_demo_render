@@ -119,3 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'home.html';
         });
     });
+
+    //chnages by Anjali
+document.addEventListener('DOMContentLoaded', function () {
+    // Fetch username and content from localStorage
+    const loggedInUsername = localStorage.getItem('username');
+    const loggedInContent = localStorage.getItem('content');
+
+    // Dynamically update the username and content
+    if (loggedInUsername) {
+        document.getElementById('username').textContent = loggedInUsername;
+    }
+    if (loggedInContent) {
+        document.getElementById('content').textContent = loggedInContent;
+    }
+});

@@ -2,6 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.DemoRepository;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +31,24 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public ResponseEntity<?> login(User user) {
         // Find the user by email
-        User existingUser = demoRepository.findByEmail(user.getEmail());
+        User existingUser = demoRepository.findByUsername(user.getUsername());
 
-        // Check if user exists and password matches
-        if (existingUser == null || !existingUser.getPassword().equals(user.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password!");
+        if (existingUser == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username!");
         }
+    
+        // Check if password matches
+        if (!existingUser.getPassword().equals(user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password!");
+        }
+    
+        // Login successful
+        // return ResponseEntity.ok(existingUser.getUsername());
 
-        return ResponseEntity.ok("Login successful!");
+        Map<String, String> response = new HashMap<>();
+    response.put("username", existingUser.getUsername());
+    response.put("content", existingUser.getContent());
+    return ResponseEntity.ok(response);
     }
+
 }

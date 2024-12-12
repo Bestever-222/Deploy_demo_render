@@ -22,9 +22,21 @@
 
             <button type="submit" class="btn">Login</button>
 
-            <div class="forgot-password">
+            <!-- <div class="forgot-password">
                 <a href="#">Forgot Password?</a>
+            </div> -->
+            <div class="forgot-password">
+                <a href="#" id="forgotPasswordLink">Forgot Password?</a>
             </div>
+            
+            <!-- Forgot Password Modal -->
+            <!-- <div id="forgotPasswordModal" style="display:none;">
+                <form id="forgotPasswordForm">
+                    <label for="email">Enter your email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <button type="submit">Send Password</button>
+                </form>
+            </div> -->
 
             <div class="signup">
                 <p class="signup">If you are a new user, <a href="signup.html">SIGN UP</a></p>
@@ -34,52 +46,102 @@
 
     <script>
         function loginUser() {
-            // Get the username and password values
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+    // Prevent form submission and handle login via JavaScript
+    event.preventDefault();
 
-            // Simple validation (you can customize this logic)
-            if (username === username && password === password) {
-                // Redirect to profile page
-                window.location.href = "logo.html";
-                return false; // Prevent form from actually submitting (since we handle redirection)
-            } else {
-                alert("Invalid username or password!");
-                return false; // Prevent form from submitting if login fails
-            }
+    // Get the username and password values
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    // Create the user object to send to the backend
+    const user = {
+        username: username, // Assuming 'email' is used as a username in your backend
+        password: password
+    };
+
+    // Send login request to backend
+    fetch('http://localhost:8080/api/demo/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    })
+
+    // username and content type with logo 
+
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Parse response JSON
+        } else {
+            throw new Error('Invalid username or password!');
         }
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    })
+    .then(data => {
+        // Save the username and content temporarily in localStorage
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('content', data.content);
 
-            const user = {
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value
-            };
+        // Redirect to the logo page
+        window.location.href = "logo.html"; // Redirects to logo.html
+    })
+    .catch(error => {
+        alert(error.message);
+    });
 
-            // Send login request to backend
-            fetch('http://localhost:8080/api/demo/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            })
-                .then(response => response.text())
-                .then(data => {
-                    if (data === "Login successful") {
-                        alert("Login successful!");
-                        window.location.href = "logo.html";  // Redirect on successful login
-                    } else {
-                        alert("Invalid login credentials");
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-        // Assuming the signup is successful
-        const contentType = document.getElementById('content').value; // Get content type from form
+return false;
+}
 
-        localStorage.setItem('username', username);  // Store username
-        localStorage.setItem('content', content);  // Store content type
-        // Redirect to the home page
-        window.location.href = "logo.html";
+// Add event listener for the form submit
+// Open the modal when "Forgot Password?" is clicked
+// document.getElementById("forgotPasswordLink").addEventListener("click", function (event) {
+//     event.preventDefault();
+//     document.getElementById("forgotPasswordModal").style.display = "block";
+// });
+
+// // Close the modal when the "Close" button is clicked
+// document.getElementById("closeModal").addEventListener("click", function () {
+//     document.getElementById("forgotPasswordModal").style.display = "none";
+// });
+
+// // Handle form submission for forgot password
+// // Open the modal when "Forgot Password?" is clicked
+// document.getElementById("forgotPasswordLink").addEventListener("click", function (event) {
+//     event.preventDefault();
+//     document.getElementById("forgotPasswordModal").style.display = "block";
+// });
+
+// // Close the modal when the "Close" button is clicked
+// document.getElementById("closeModal").addEventListener("click", function () {
+//     document.getElementById("forgotPasswordModal").style.display = "none";
+// });
+
+// // Handle form submission for forgot password
+// document.getElementById("forgotPasswordForm").addEventListener("submit", function (event) {
+//     event.preventDefault(); // Prevent default form action
+
+//     const email = document.getElementById("email").value;
+
+//     // Send request to backend
+//     fetch("/api/demo/forgot-password", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ email: email }),
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             if (data.success) {
+//                 alert("Password has been sent to your email.");
+//             } else {
+//                 alert("Error: " + (data.message || "Please try again."));
+//             }
+//             document.getElementById("forgotPasswordModal").style.display = "none"; // Close modal after response
+//         })
+//         .catch((error) => {
+//             console.error("Error:", error);
+//             alert("Something went wrong. Please try again later.");
+//         });
+// });
 
 
     </script>

@@ -191,3 +191,49 @@ function postToCommunity() {
     input.value = '';
 }
 
+//Chat room by Anjali
+let chatMessages = JSON.parse(localStorage.getItem('chatRoomMessages')) || [];
+
+// Render chat messages
+function renderMessages() {
+    const chatContainer = document.getElementById('chatMessages');
+    chatContainer.innerHTML = chatMessages
+        .map((msg, index) => `
+            <div class="chat-message">
+                <span><strong>${msg.user}:</strong> ${msg.text}</span>
+                <button class="delete-btn" onclick="deleteMessage(${index})">Delete</button>
+            </div>
+        `)
+        .join('');
+    chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll to the latest message
+}
+
+// Send a message
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (message) {
+        chatMessages.push({ user: 'You', text: message });
+        localStorage.setItem('chatRoomMessages', JSON.stringify(chatMessages));
+        renderMessages();
+        input.value = ''; // Clear the input
+    }
+}
+
+// Delete a message
+function deleteMessage(index) {
+    chatMessages.splice(index, 1); // Remove the message at the given index
+    localStorage.setItem('chatRoomMessages', JSON.stringify(chatMessages));
+    renderMessages();
+}
+
+
+// Auto-refresh chat messages every second
+setInterval(() => {
+    chatMessages = JSON.parse(localStorage.getItem('chatRoomMessages')) || [];
+    renderMessages();
+}, 1000);
+
+// Initial render
+renderMessages();
+
