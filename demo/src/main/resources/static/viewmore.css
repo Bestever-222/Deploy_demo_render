@@ -13,19 +13,6 @@ body {
     color: #333;
 }
 
-/* Header */
-.header {
-    background-color: #0073e6;
-    text-align: center;
-    padding: 20px 0;
-}
-
-.banner-img {
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
-}
-
 /* Main Container */
 .container {
     display: flex;
@@ -46,6 +33,18 @@ body {
     margin-bottom: 30px;
 }
 
+
+.divider {
+    height: 2px; /* Thickness */
+    max-width: 500px; /* Maximum width for larger screens */
+    width: 100%; /* Relative width for responsiveness */
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient effect */
+    margin: 15px auto; /* Centers the divider with spacing */
+    border-radius: 5px; /* Rounded edges */
+    opacity: 0.9; /* Slight transparency */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds depth */
+    transition: width 0.3s ease; /* Smooth animation on resize */
+  }
 /* Increase spacing between "Add to Queue" and "Watch Later" sections */
 .action-section {
     margin-bottom: 20px; /* Adjust the value for more or less space */
@@ -58,7 +57,7 @@ body {
 
 
 .action-container {
-    background: #f9f9f9;
+    background: #fff9f9;
     padding: 10px;
     border-radius: 5px;
     max-height: 200px;
@@ -437,4 +436,66 @@ body {
 .playlists-container .iframe-wrapper {
     flex: 1 1 100%;
     max-width: 100%;
+}
+
+/*chat room css*/
+.chat-messages {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.chat-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-message:last-child {
+    border-bottom: none;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.chat-send-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.chat-send-btn:hover {
+    background-color: #005bb5;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
 }

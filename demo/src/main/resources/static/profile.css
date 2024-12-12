@@ -13,13 +13,15 @@ body {
 /* Full-Width Header */
 .full-header {
     width: 100%;
-    height: 300px;  /* Set a fixed height for the header */
-    background-image: url('assets/banner.png');  /* Replace with your provided background image */
-    background-size: cover;  /* Ensure the image covers the entire header */
-    background-position: center;  /* Center the background image */
+    height: 350px;  /* Set a fixed height for the header */
+    background-image: url('assets/banner_profile.png');  /* Replace with your provided background image */
+    background-size: cover; /* Fit and crop image as needed */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
     position: relative;
     border-bottom-left-radius: 25px;  /* Optional rounding of the bottom corners */
     border-bottom-right-radius: 25px;
+    background-size: 100% 100%;
 }
 
 .profile-image {

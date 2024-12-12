@@ -1,4 +1,3 @@
-// Profile Photo Upload Functionality
 document.getElementById("uploadIcon").addEventListener("click", function () {
     document.getElementById("uploadPhoto").click();
 });
@@ -8,33 +7,56 @@ document.getElementById("uploadPhoto").addEventListener("change", function (even
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
+            // Update the profile image
             const profileImage = document.getElementById("profileImage");
             profileImage.src = e.target.result;
 
             // Store the uploaded profile image in localStorage
             localStorage.setItem("profileImage", e.target.result);
+
+            // Also update sessionStorage
+            sessionStorage.setItem("profileImage", e.target.result);
         };
         reader.readAsDataURL(file);
     }
 });
 
+// On page load
 document.addEventListener("DOMContentLoaded", function () {
-    const savedProfileImage = localStorage.getItem("profileImage");
-    if (savedProfileImage) {
-        document.getElementById("profileImage").src = savedProfileImage;
+    const savedSessionImage = sessionStorage.getItem("profileImage");
+    const savedLocalImage = localStorage.getItem("profileImage");
+
+    const profileImage = document.getElementById("profileImage");
+
+    if (savedSessionImage) {
+        // Load image from sessionStorage (for the current session)
+        profileImage.src = savedSessionImage;
+    } else if (savedLocalImage) {
+        // Load image from localStorage (if navigating back to the page)
+        profileImage.src = savedLocalImage;
+        // Update sessionStorage for continuity during this session
+        sessionStorage.setItem("profileImage", savedLocalImage);
+    } else {
+        // Default image for new session or refresh
+        profileImage.src = "assets/profile.jpg"; // Set your default image path here
     }
 });
 
-// Reset to Default Profile Image After Refresh
-window.addEventListener("beforeunload", function () {
-    // Clear the uploaded profile image from localStorage when refreshing
-    localStorage.removeItem("profileImage");
+
+// Show Modal when plus button is clicked
+document.getElementById("bottomPlusIcon").addEventListener("click", function () {
+    document.getElementById("addPostModal").style.display = "flex";
 });
 
-// Add Post Functionality
-document.getElementById("addPostButton").addEventListener("click", function () {
-    const postInput = document.getElementById("postInput").value.trim();
-    const mediaInput = document.getElementById("mediaInput").files;
+// Close Modal
+document.getElementById("closeModal").addEventListener("click", function () {
+    document.getElementById("addPostModal").style.display = "none";
+});
+
+// Add Post from Modal
+document.getElementById("modalAddPostButton").addEventListener("click", function () {
+    const postInput = document.getElementById("modalPostInput").value.trim();
+    const mediaInput = document.getElementById("modalMediaInput").files;
 
     if (postInput === "" && mediaInput.length === 0) {
         alert("Cannot add an empty post!");
@@ -43,44 +65,66 @@ document.getElementById("addPostButton").addEventListener("click", function () {
 
     const mediaFiles = [];
     if (mediaInput.length > 0) {
+        let loaded = 0;
         for (let i = 0; i < mediaInput.length; i++) {
+            const file = mediaInput[i];
             const fileReader = new FileReader();
+
             fileReader.onload = function (e) {
-                mediaFiles.push(e.target.result);
+                mediaFiles.push({ src: e.target.result, type: file.type });
+                loaded++;
+                if (loaded === mediaInput.length) {
+                    createPost(postInput, mediaFiles);
+                    resetModalInputs();
+                }
             };
-            fileReader.readAsDataURL(mediaInput[i]);
+
+            fileReader.onerror = function () {
+                console.error("Error reading file:", file.name);
+            };
+
+            fileReader.readAsDataURL(file);
         }
-    }
-
-    // Small delay to allow media files to load
-    setTimeout(() => {
+    } else {
         createPost(postInput, mediaFiles);
-
-        // Clear input fields after adding the post
-        document.getElementById("postInput").value = ""; // Clear the post text
-        document.getElementById("mediaInput").value = ""; // Clear the file input
-    }, 500);
+        resetModalInputs();
+    }
 });
 
-// Function to create a new post
+function resetModalInputs() {
+    document.getElementById("modalPostInput").value = "";
+    document.getElementById("modalMediaInput").value = "";
+    document.getElementById("addPostModal").style.display = "none";
+}
+
+// Function to create a new post in the main content area
 function createPost(postText, mediaFiles, originalUserName = null) {
     const postContainer = document.getElementById("postContainer");
     const postDiv = document.createElement("div");
     postDiv.classList.add("user-post");
 
-    const profileImage = localStorage.getItem("profileImage") || "assets/profile.jpg";
+    const noPostsMessage = document.getElementById("noPostsMessage");
+    if (noPostsMessage && noPostsMessage.style.display !== "none") {
+        noPostsMessage.style.display = "none";
+    }
 
-    // Add "Reposted from" if it's a repost
+    // Fetch dynamic username and content from localStorage
+    const dynamicUserName = localStorage.getItem("username") || "Riya";
+    const dynamicContent = localStorage.getItem("content") || "Comedy content creator";
+
+    // If the post is a repost, modify the username text
     const userNameText = originalUserName
-        ? `Riya reposted this`
-        : "Riya";
+        ? `${originalUserName} (Reposted by ${dynamicUserName})`
+        : dynamicUserName;
+
+    const profileImage = localStorage.getItem("profileImage") || "assets/profile.jpg";
 
     const userInfo = `
         <div class="user-info" style="display: flex; align-items: center;">
             <img src="${profileImage}" alt="User Photo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 15px;">
             <div class="user-details">
                 <h3 style="margin-bottom: 5px;">${userNameText}</h3>
-                <p style="color: #777;">Comedy content creator</p>
+                <p style="color: #777;">${dynamicContent}</p>
             </div>
         </div>
     `;
@@ -95,10 +139,18 @@ function createPost(postText, mediaFiles, originalUserName = null) {
     postDiv.innerHTML = userInfo + postContent;
 
     if (mediaFiles.length > 0) {
-        mediaFiles.forEach(src => {
-            const mediaElement = document.createElement("img");
-            mediaElement.src = src;
-            mediaElement.classList.add("post-image");
+        mediaFiles.forEach(({ src, type }) => {
+            let mediaElement;
+            if (type.startsWith("image/")) {
+                mediaElement = document.createElement("img");
+                mediaElement.src = src;
+                mediaElement.classList.add("post-image");
+            } else if (type.startsWith("video/")) {
+                mediaElement = document.createElement("video");
+                mediaElement.src = src;
+                mediaElement.controls = true;
+                mediaElement.classList.add("post-video");
+            }
             postDiv.querySelector(".post-content").appendChild(mediaElement);
         });
     }
@@ -109,7 +161,7 @@ function createPost(postText, mediaFiles, originalUserName = null) {
             <button class="share-button">🔗 Share</button>
             <button class="comment-button">💬 Comment</button>
             <button class="repost-button">🔄 Repost</button>
-            <button class="delete-button">🗑️ Delete</button>
+            <button class="delete-button">🗑 Delete</button>
         </div>
         <div class="comment-box" style="display: none;">
             <textarea placeholder="Write a comment..."></textarea>
@@ -120,13 +172,11 @@ function createPost(postText, mediaFiles, originalUserName = null) {
     postDiv.innerHTML += interactionIcons;
     postContainer.prepend(postDiv);
 
-    // Attach event listeners to the new post
     addPostInteractionListeners(postDiv);
 }
 
-// Function to add interaction listeners
+// Function to add interaction listeners to posts
 function addPostInteractionListeners(postDiv) {
-    // Like Button
     postDiv.querySelector(".like-button").addEventListener("click", function () {
         let likeCount = parseInt(this.getAttribute("data-likes"));
         const liked = this.getAttribute("data-liked") === "true";
@@ -144,65 +194,64 @@ function addPostInteractionListeners(postDiv) {
         this.setAttribute("data-likes", likeCount);
     });
 
-    // Comment Button
     postDiv.querySelector(".comment-button").addEventListener("click", function () {
         const commentBox = postDiv.querySelector(".comment-box");
         commentBox.style.display = commentBox.style.display === "none" ? "block" : "none";
     });
 
-    // Submit Comment
     postDiv.querySelector(".submit-comment").addEventListener("click", function () {
         const commentInput = postDiv.querySelector(".comment-box textarea");
         const commentText = commentInput.value.trim();
 
         if (commentText) {
+            const dynamicUserName = localStorage.getItem("username") || "Riya"; // Fetch dynamic username
             const commentList = postDiv.querySelector(".comment-list");
-
             const commentItem = document.createElement("div");
+        
             commentItem.innerHTML = `
                 <div style="display: flex; align-items: center; margin-top: 10px;">
                     <img src="${localStorage.getItem("profileImage") || "assets/profile.jpg"}" alt="User Photo" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
-                    <p style="margin: 0; font-size: 14px;"><strong>Riya:</strong> ${commentText}</p>
+                    <p style="margin: 0; font-size: 14px;"><strong>${dynamicUserName}:</strong> ${commentText}</p>
                 </div>
             `;
             commentList.appendChild(commentItem);
-
             commentInput.value = "";
         } else {
             alert("Comment cannot be empty!");
         }
+        
     });
 
-    // Repost Button
     postDiv.querySelector(".repost-button").addEventListener("click", function () {
-        const originalUserName = postDiv.querySelector(".user-details h3").innerText.split("Reposted from ")[1] || postDiv.querySelector(".user-details h3").innerText;
+        const originalUserName = postDiv.querySelector(".user-details h3").innerText;
         const postText = postDiv.querySelector(".post-text").innerText;
-        const mediaElements = postDiv.querySelectorAll(".post-image");
-        const mediaSources = Array.from(mediaElements).map(img => img.src);
+        const mediaElements = postDiv.querySelectorAll(".post-image, .post-video");
+        const mediaSources = Array.from(mediaElements).map(el => ({
+            src: el.src,
+            type: el.tagName.toLowerCase() === "img" ? "image/" : "video/",
+        }));
         createPost(postText, mediaSources, originalUserName);
     });
 
-    // Share Button Functionality
-    const shareButton = postDiv.querySelector(".share-button");
-    if (shareButton) {
-        shareButton.addEventListener("click", function () {
-            const postText = postDiv.querySelector(".post-text").innerText;
-            const shareData = {
-                title: "Shared Post",
-                text: postText,
-                url: window.location.href
-            };
+    // Share Button
+        const shareButton = postDiv.querySelector(".share-button");
+        if (shareButton) {
+            shareButton.addEventListener("click", function () {
+                const postText = postDiv.querySelector(".post-text").innerText;
+                const shareData = {
+                    title: "Shared Post",
+                    text: postText,
+                    url: window.location.href
+                };
 
-            // Use Web Share API if available
-            if (navigator.share) {
-                navigator.share(shareData).catch(err => console.error("Share failed:", err));
-            } else {
-                alert("Sharing is not supported on this browser. Try copying the URL!");
-            }
-        });
-    }
+                if (navigator.share) {
+                    navigator.share(shareData).catch(err => console.error("Share failed:", err));
+                } else {
+                    alert("Sharing is not supported on this browser. Try copying the URL!");
+                }
+            });
+        }
 
-    // Delete Button
     postDiv.querySelector(".delete-button").addEventListener("click", function () {
         if (confirm("Are you sure you want to delete this post?")) {
             postDiv.remove();
@@ -210,12 +259,21 @@ function addPostInteractionListeners(postDiv) {
     });
 }
 
-// Attach listeners to all posts on page load
+// Attach listeners to all existing posts on page load
 document.addEventListener("DOMContentLoaded", function () {
     const allPosts = document.querySelectorAll(".user-post");
     allPosts.forEach(postDiv => addPostInteractionListeners(postDiv));
-});
 
+    // HERE: Add the code to show/hide noPostsMessage
+        const postContainer = document.getElementById("postContainer");
+        const noPostsMessage = document.getElementById("noPostsMessage");
+        if (!postContainer.querySelector(".user-post")) {
+            // No posts found, show the message
+            noPostsMessage.style.display = "block";
+        } else {
+            noPostsMessage.style.display = "none";
+        }
+});
 // Redirect to profile.html when profile image is clicked
 document.getElementById("profileImage").addEventListener("click", function () {
     window.location.href = "profile.html";
@@ -224,10 +282,53 @@ document.getElementById("profileImage").addEventListener("click", function () {
 document.getElementById("mentorshipButton").addEventListener("click", function () {
     window.location.href = "mentoring.html"; // Replace with the correct path to your mentorship page
 });
-// Ensure the button redirects to the "network.html" page
+// Redirect to mentorship.html when mentorship button is clicked
 document.getElementById("networkButton").addEventListener("click", function () {
-    console.log("Connect & Grow button clicked!"); // Debug log
-    window.location.href = "network.html"; // Ensure the file path is correct
+    window.location.href = "network.html"; // Replace with the correct path to your mentorship page
+});
+
+
+
+//for notification bell icon
+document.addEventListener("DOMContentLoaded", () => {
+    const notificationBell = document.getElementById("notification-bell");
+    const notificationPanel = document.getElementById("notification-panel");
+    const notificationItems = document.querySelectorAll(".notification-item");
+    const notificationBadge = document.getElementById("notification-badge");
+
+    // Toggle the notification panel
+    notificationBell.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent click event from propagating
+        notificationPanel.classList.toggle("visible");
+    });
+
+    // Close the notification panel when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!notificationBell.contains(event.target) && !notificationPanel.contains(event.target)) {
+            notificationPanel.classList.remove("visible");
+        }
+    });
+
+    // Handle clicking on a notification
+    notificationItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            if (item.getAttribute("data-read") === "false") {
+                item.classList.remove("unread");
+                item.classList.add("read");
+                item.setAttribute("data-read", "true");
+
+                // Update the notification badge count
+                let unreadCount = parseInt(notificationBadge.innerText, 10);
+                unreadCount = unreadCount > 0 ? unreadCount - 1 : 0;
+                notificationBadge.innerText = unreadCount;
+
+                // Hide the badge if all notifications are read
+                if (unreadCount === 0) {
+                    notificationBadge.style.display = "none";
+                }
+            }
+        });
+    });
 });
 
 // Chat Section
@@ -248,10 +349,11 @@ const defaultConnections = [
     { name: "Samiksha Nankar", field: "Memer" },
     { name: "Anjali Tiwary", field: "Musician" },
     { name: "Payal Nikam", field: "Playback Singer" },
-];
-
-// Chat responses
-const chatResponses = {
+ ];
+ 
+ 
+ // Chat responses
+ const chatResponses = {
     greeting: [
         "Hey there! How’s it going?",
         "Hi! Ready to brainstorm ideas?",
@@ -334,17 +436,20 @@ const chatResponses = {
         "Take care and stay inspired!",
         "Catch you later! Keep up the great work!",
     ],
-};
-
-// Get a random response
-function getRandomResponse(responseArray) {
+ };
+ 
+ 
+ // Get a random response
+ function getRandomResponse(responseArray) {
     return responseArray[Math.floor(Math.random() * responseArray.length)];
-}
-
-// Determine the response for a message
-function getChatResponse(message) {
+ }
+ 
+ 
+ // Determine the response for a message
+ function getChatResponse(message) {
     const lowerCaseMessage = message.toLowerCase();
-
+ 
+ 
     if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
         return getRandomResponse(chatResponses.greeting);
     } else if (
@@ -374,17 +479,19 @@ function getChatResponse(message) {
     } else {
         return getRandomResponse(chatResponses.general); // General fallback
     }
-}
-
-// Initialize chat functionality
-function initializeChat() {
+ }
+ 
+ 
+ // Initialize chat functionality
+ function initializeChat() {
     const chatList = document.getElementById("chatList");
     const chatWindow = document.getElementById("chatWindow");
     const chatBody = document.getElementById("chatBody");
     const chatInput = document.getElementById("chatInput");
     const sendMessageButton = document.getElementById("sendMessage");
     const backToChatListButton = document.getElementById("backToChatList");
-
+ 
+ 
     // Render the default connections in the chat list
     function renderConnections(connections) {
         chatList.innerHTML = ""; // Clear the previous list
@@ -399,7 +506,8 @@ function initializeChat() {
             chatList.appendChild(connectionDiv);
         });
     }
-
+ 
+ 
     // Open a chat window for a specific connection
     function openChat(connection) {
         chatList.style.display = "none";
@@ -408,7 +516,8 @@ function initializeChat() {
         document.getElementById("chatUserField").textContent = connection.field;
         chatBody.innerHTML = `<p class="placeholder-text">Start a conversation with ${connection.name}</p>`;
     }
-
+ 
+ 
     // Add a message to the chat body
     function addMessage(message, sender) {
         const messageBubble = document.createElement("div");
@@ -417,21 +526,25 @@ function initializeChat() {
         chatBody.appendChild(messageBubble);
         chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
     }
-
+ 
+ 
     // Handle sending a message
     sendMessageButton.addEventListener("click", () => {
         const message = chatInput.value.trim();
         if (message) {
             // Add the user's message
             addMessage(message, "user");
-
+ 
+ 
             // Remove placeholder
             const placeholder = chatBody.querySelector(".placeholder-text");
             if (placeholder) placeholder.remove();
-
+ 
+ 
             // Clear the input field
             chatInput.value = "";
-
+ 
+ 
             // Simulate a response with a delay
             setTimeout(() => {
                 const response = getChatResponse(message);
@@ -439,13 +552,15 @@ function initializeChat() {
             }, 1000);
         }
     });
-
+ 
+ 
     // Go back to the chat list
     backToChatListButton.addEventListener("click", () => {
         chatWindow.style.display = "none";
         chatList.style.display = "flex";
     });
-
+ 
+ 
     // Search chat connections dynamically
     const searchChat = document.getElementById("searchChat");
     searchChat.addEventListener("input", () => {
@@ -455,11 +570,50 @@ function initializeChat() {
         );
         renderConnections(filteredConnections);
     });
-
+ 
+ 
     // Initial render of connections
     renderConnections(defaultConnections);
-}
+ }
+ 
+ //chnages by anjali
+ // Initialize on page load
+ document.addEventListener("DOMContentLoaded", initializeChat);
 
-// Initialize on page load
-document.addEventListener("DOMContentLoaded", initializeChat);
+ document.addEventListener('DOMContentLoaded', function () {
+    // Function to fetch query parameters
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param); // Returns the parameter value
+    }
 
+    // Get username and content from query parameters
+    const loggedInUsername = getQueryParam('username');
+    const loggedInContent = getQueryParam('content');
+
+    // Update username and content dynamically
+    if (loggedInUsername) {
+        document.getElementById('username').textContent = loggedInUsername;
+    }
+    if (loggedInContent) {
+        document.getElementById('content').textContent = loggedInContent;
+    }
+});
+console.log("for type");
+
+//chnages by samiksha
+// At the end of home.js
+
+const modalMediaInput = document.getElementById("modalMediaInput");
+const fileChosen = document.getElementById("fileChosen");
+
+modalMediaInput.addEventListener("change", () => {
+    if (modalMediaInput.files.length > 0) {
+        fileChosen.textContent = modalMediaInput.files.length === 1
+            ? modalMediaInput.files[0].name
+            : modalMediaInput.files.length + " files selected";
+    } else {
+        fileChosen.textContent = "No file chosen";
+    }
+});
+ 

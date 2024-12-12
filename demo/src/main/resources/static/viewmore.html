@@ -8,27 +8,25 @@
     <script defer src="viewmore.js"></script>
 </head>
 <body>
-<!-- Header Section -->
-<header class="header">
-    <div class="banner">
-        <img src="assets/banner.png" alt="Banner" class="banner-img">
-    </div>
-</header>
 
 <!-- Main Container -->
 <div class="container">
     <!-- Sidebar Section -->
     <aside class="sidebar">
         <h3>My Actions</h3>
+        <div class="divider"></div>
         <div class="action-section">
-            <h4>Add to Queue</h4>
-            <div id="queue-container" class="action-container"></div>
+            <h4><i class="fas fa-plus-circle"></i> Add to Queue</h4>
+            <div id="queue-container" class="action-container">
+            </div>
         </div>
         <div class="action-section">
-            <h4>Watch Later</h4>
-            <div id="watchlater-container" class="action-container"></div>
+            <h4><i class="fas fa-clock"></i> Watch Later</h4>
+            <div id="watchlater-container" class="action-container">
+            </div>
         </div>
     </aside>
+
 
     <!-- Main Content -->
     <main class="main-content">
@@ -389,6 +387,14 @@
         <textarea id="communityInput" placeholder="Post something..." rows="3"></textarea>
         <button class="post-btn" onclick="postToCommunity()">Post</button>
     </div>
+    <h2>Chat Room</h2>
+    <div id="chatMessages" class="chat-messages">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input-container">
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button class="chat-send-btn" onclick="sendMessage()">Send</button>
+    </div>
 </section>
 
 

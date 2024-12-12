@@ -12,7 +12,7 @@ public class DemoController {
 
     @Autowired
     private DemoService demoService;
-
+      
     // Endpoint for Signup
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
@@ -23,5 +23,5 @@ public class DemoController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         return demoService.login(user);
-    }
+    }  
 }
