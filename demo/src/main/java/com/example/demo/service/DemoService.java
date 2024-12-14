@@ -7,3 +7,4 @@ public interface DemoService {
     ResponseEntity<?> signup(User user);
     ResponseEntity<?> login(User user);
 }
+
