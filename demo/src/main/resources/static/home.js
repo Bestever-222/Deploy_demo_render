@@ -280,7 +280,7 @@ document.getElementById("profileImage").addEventListener("click", function () {
 });
 // Redirect to mentorship.html when mentorship button is clicked
 document.getElementById("mentorshipButton").addEventListener("click", function () {
-    window.location.href = "mentoring.html"; // Replace with the correct path to your mentorship page
+    window.location.href = "subscription.html"; // Replace with the correct path to your mentorship page
 });
 // Redirect to mentorship.html when mentorship button is clicked
 document.getElementById("networkButton").addEventListener("click", function () {
