@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creator Mentoring</title>
+    <link rel="stylesheet" href="subscription.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Cre8Hub</div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="network.html">Network</a></li>
+                <li><a href="network.html">Explore</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Learn from Expert Content Creators</h1>
+            <p>Get personalized mentoring to accelerate your growth</p>
+            <button id="subscribeBtn" class="cta-button">Subscribe Now</button>
+        </section>
+        <section class="plans">
+            <h2>Choose Your Plan</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3>Basic</h3>
+                    <p class="plan-price">$49/month</p>
+                    <ul class="plan-features">
+                        <li>1 Mentor Session/month</li>
+                        <li>Basic Resources Access</li>
+                        <li>Community Access</li>
+                    </ul>
+                    <button class="cta-button" onclick="showMentorModal('basic')">Choose Mentor</button>
+                </div>
+                <div class="plan-card featured">
+                    <h3>Pro</h3>
+                    <p class="plan-price">$99/month</p>
+                    <ul class="plan-features">
+                        <li>4 Mentor Sessions/month</li>
+                        <li>Premium Resources</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="cta-button" onclick="showMentorModal('pro')">Choose Mentor</button>
+                </div>
+                <div class="plan-card">
+                    <h3>Premium</h3>
+                    <p class="plan-price">$199/month</p>
+                    <ul class="plan-features">
+                        <li>Unlimited Sessions</li>
+                        <li>VIP Resources</li>
+                        <li>24/7 Support</li>
+                    </ul>
+                    <button class="cta-button" onclick="showMentorModal('premium')">Choose Mentor</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+ <!-- Mentor Selection Modal -->
+<div id="mentorModal" class="modal">
+    <div class="modal-content">
+        <span class="close mentor-close">&times;</span>
+        <h2>Choose Your Mentor</h2>
+        <p class="subtitle">Expert guidance to help you succeed</p>
+        <div id="mentorGrid" class="mentor-grid">
+            <!-- Mentor cards will be dynamically populated here -->
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close payment-close">&times;</span>
+        <h2>Subscribe to <span id="mentorName">Michael Chen</span></h2>
+        <p class="price-info">
+            Monthly Subscription <span class="price" id="subscriptionPrice">$89</span>
+        </p>
+        <div class="secure-indicator">
+            <span>&#x1F512;</span> Secure Payment Processing
+        </div>
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+            <button type="submit" class="cta-button">Pay <span id="payAmount">$89</span> and Subscribe</button>
+        </form>
+    </div>
+</div>
+
+
+    <script src="subscription.js"></script>
+</body>
+</html>
