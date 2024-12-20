@@ -11,8 +11,6 @@ RUN ls -al /app
 COPY pom.xml /app/
 COPY src /app/src/
 
-COPY . /app/
-
 
 # Download dependencies and build the application
 RUN mvn dependency:go-offline
