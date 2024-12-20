@@ -4,9 +4,15 @@ FROM maven:3.8.7-eclipse-temurin-17 AS builder
 # Set working directory in the container
 WORKDIR /app
 
+RUN ls -al /app
+
+
 # Copy the pom.xml and source code
-COPY ./pom.xml .
-COPY ./src ./src
+COPY pom.xml /app/
+COPY src /app/src/
+
+COPY . /app/
+
 
 # Download dependencies and build the application
 RUN mvn dependency:go-offline
