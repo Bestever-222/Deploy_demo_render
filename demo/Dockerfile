@@ -1,30 +1,27 @@
-# Use Maven to build the project
+# Stage 1: Build the application using Maven
 FROM maven:3.8.7-eclipse-temurin-17 AS builder
 
-
-# Set the working directory inside the container
+# Set working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml and download dependencies
-COPY pom.xml .
+# Copy the pom.xml and source code
+COPY ./pom.xml .
+COPY ./src ./src
+
+# Download dependencies and build the application
 RUN mvn dependency:go-offline
-
-# Copy the source code
-COPY src /app/src
-
-# Package the application using Maven
 RUN mvn clean package -DskipTests
 
-# Use OpenJDK to run the packaged application
-FROM openjdk:17-slim
+# Stage 2: Run the application using JDK
+FROM eclipse-temurin:17-jdk
 
-# Set the working directory inside the container
+# Set working directory in the container
 WORKDIR /app
 
-# Copy the jar file from the builder image
+# Copy the built JAR file from the builder stage
 COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
 
-# Expose the port your app will run on (default Spring Boot port is 8080)
+# Expose the application's port
 EXPOSE 8080
 
 # Command to run the application
