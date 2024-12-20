@@ -1,5 +1,6 @@
 # Use Maven to build the project
-FROM maven:3.8.6-openjdk-17-slim AS builder
+FROM maven:3.8.7-eclipse-temurin-17 AS builder
+
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -21,7 +22,7 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Copy the jar file from the builder image
-COPY --from=builder /app/target/your-app.jar /app/demo-0.0.1-SNAPSHOT.jar
+COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
 
 # Expose the port your app will run on (default Spring Boot port is 8080)
 EXPOSE 8080
