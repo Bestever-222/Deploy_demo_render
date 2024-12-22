@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
 
     // Map root URL ("/") to the landing page
+    @GetMapping("/")
+    public String rootPage() {
+        return "landing.html"; // Serves the landing page
+    }
+
+    // Map /landing URL to the landing page
     @GetMapping("/landing")
     public String landingPage() {
         return "landing.html"; // Serves the landing page
