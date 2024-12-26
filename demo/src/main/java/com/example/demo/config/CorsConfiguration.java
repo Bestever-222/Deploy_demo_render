@@ -13,13 +13,12 @@ public class CorsConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")  // Apply to all paths
-                .allowedOrigins("https://deploy-demo-render-4-1z5l.onrender.com")  // Only allow your frontend URL
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("Content-Type", "Authorization", "Accept")
-                .allowCredentials(true); // If you are using cookies or authentication headers
+                registry.addMapping("/**") // Apply CORS to all endpoints
+                        .allowedOrigins("https://deploy-demo-render-4-uyae.onrender.com", "http://localhost:3000") // Your deployed and local frontend URLs
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
+                        .allowedHeaders("*") // Allow all headers
+                        .allowCredentials(true); // Allow credentials (if needed)
             }
         };
     }
 }
-
