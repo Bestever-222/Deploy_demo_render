@@ -27,10 +27,5 @@ COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 # Expose the application's port
 EXPOSE 8080
 
-# Set environment variables for MongoDB connection (optional)
-# You can set these dynamically in your deployment environment as well
-ENV SPRING_DATA_MONGODB_URI=mongodb+srv://Payal:abcd@cre8hub.fa6t0.mongodb.net/<database-name>?retryWrites=true&w=majority&appName=cre8hub
-ENV SPRING_PROFILES_ACTIVE=prod
-
 # Command to run the application
 CMD ["java", "-jar", "/app/demo.jar"]
