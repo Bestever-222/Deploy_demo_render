@@ -14,7 +14,7 @@ public class CorsConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Apply CORS to all endpoints
-                        .allowedOrigins("https://deploy-demo-render-4-uyae.onrender.com", "http://localhost:3000") // Your deployed and local frontend URLs
+                        .allowedOrigins("https://deploy-demo-render-5-5vok.onrender.com", "http://localhost:3000") // Your deployed and local frontend URLs
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Allow credentials (if needed)
