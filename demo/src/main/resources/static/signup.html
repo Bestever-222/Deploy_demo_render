@@ -96,7 +96,7 @@
         };
 
         // Send signup request to the backend
-        fetch('https://deploy-demo-render-5-5vok.onrender.com/signup', {
+        fetch('/api/demo/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
