@@ -8,8 +8,11 @@
     <meta http-equiv="Expires" content="0">
     <title>Profile Form</title>
     <link rel="stylesheet" href="signup.css">
-    <!-- Link to Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 </head>
 <body>
 <div class="header">
@@ -57,111 +60,119 @@
             <option value="add-new" id="add-new-content">+ Add New</option>
         </select><br><br>
 
-        <!-- Input to add new content type -->
         <input type="text" id="newContent" placeholder="Enter new content type" style="display:none;" /><br>
-
-        <!-- Display selected content types below -->
         <div id="selected-content-types"></div>
-
-        <!-- Submit Button -->
         <button type="submit" class="btn">Submit</button>
-
     </form>
 </div>
 
 <script>
-    document.getElementById('signupForm').addEventListener('submit', function(event)
-    {
-        event.preventDefault(); // Prevent form submission to server
-
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAYXX84eVfoH2XW8jUCW9Z54ojOofiSu_U",
+        authDomain: "createhub-3c3b5.firebaseapp.com",
+        projectId: "createhub-3c3b5",
+        storageBucket: "createhub-3c3b5.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "1:YOUR_APP_ID"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    
+    document.getElementById('signupForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         var confirmPassword = document.getElementById('confirmpassword').value;
         var email = document.getElementById('email').value;
         var gender = document.getElementById('gender').value;
         var content = document.getElementById('content').value;
-
-        // Check if the passwords match
+    
         if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return false;
         }
-
-        const user = {
-            username: username,
-            password: password,
-            email: email,
-            gender: gender,
-            content: content
-        };
-
-        // Send signup request to the backend
-        fetch('/api/demo/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();  // Assuming server returns success message in plain text
-                } else {
-                    throw new Error("Signup failed");
-                }
-            })
-            .then(data => {
-                alert(data);  // Display backend response (e.g., "Signup successful")
-                if (data === "User registered successfully!") {
-                    // Use replace to redirect, so the current page is replaced in the history
-                    window.location.replace("login.html");
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("An error occurred during signup. Please try again.");
+    
+        try {
+            // Create user in Firebase
+            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            const user = userCredential.user;
+    
+            // Send email verification
+            await user.sendEmailVerification();
+    
+            // Create user object for backend
+            const userData = {
+                username: username,
+                password:password,
+                email: email,
+                gender: gender,
+                content: content,
+                firebaseUid: user.uid,
+                emailVerified: false
+            };
+    
+            // Send signup request to the backend
+            const response = await fetch('/api/demo/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
             });
-    });
-
-    document.getElementById('content').addEventListener('change', function(event) {
-        const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
-        const addNewOption = 'add-new';
-
-        if (selectedOptions.includes(addNewOption)) {
-            document.getElementById('newContent').style.display = 'block';
-            document.getElementById('newContent').focus(); // Auto focus on input field
-        } else {
-            document.getElementById('newContent').style.display = 'none';
-        }
-
-        displaySelectedContentTypes();
-    });
-
-    // Handle new content addition when user presses Enter
-    document.getElementById('newContent').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission
-            const newContent = this.value.trim();
-            if (newContent) {
-                const contentSelect = document.getElementById('content');
-                const option = document.createElement('option');
-                option.value = newContent;
-                option.text = newContent;
-                contentSelect.appendChild(option);
-                option.selected = true; // Automatically select the newly added option
-                this.value = ''; // Clear the input field
-                document.getElementById('newContent').style.display = 'none'; // Hide input after adding
-                displaySelectedContentTypes();
+    
+            if (!response.ok) {
+                throw new Error("Signup failed");
             }
+    
+            alert("Registration successful! Please check your email for verification.");
+            window.location.replace("login.html");
+    
+        } catch (error) {
+            console.error('Error:', error);
+            alert(error.message || "An error occurred during signup. Please try again.");
         }
     });
 
-    function displaySelectedContentTypes() {
-        const selectedOptions = Array.from(document.getElementById('content').selectedOptions)
-            .map(option => option.text)
-            .filter(option => option !== '+ Add New'); // Exclude the '+ Add New' option from the display
-        const selectedContentDiv = document.getElementById('selected-content-types');
-        selectedContentDiv.innerHTML = `<strong>Selected Content Types:</strong> ${selectedOptions.join(', ')}`;
+// Content selection code
+document.getElementById('content').addEventListener('change', function(event) {
+    const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
+    const addNewOption = 'add-new';
+
+    if (selectedOptions.includes(addNewOption)) {
+        document.getElementById('newContent').style.display = 'block';
+        document.getElementById('newContent').focus();
+    } else {
+        document.getElementById('newContent').style.display = 'none';
     }
 
+    displaySelectedContentTypes();
+});
+
+document.getElementById('newContent').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const newContent = this.value.trim();
+        if (newContent) {
+            const contentSelect = document.getElementById('content');
+            const option = document.createElement('option');
+            option.value = newContent;
+            option.text = newContent;
+            contentSelect.appendChild(option);
+            option.selected = true;
+            this.value = '';
+            document.getElementById('newContent').style.display = 'none';
+            displaySelectedContentTypes();
+        }
+    }
+});
+
+function displaySelectedContentTypes() {
+    const selectedOptions = Array.from(document.getElementById('content').selectedOptions)
+        .map(option => option.text)
+        .filter(option => option !== '+ Add New');
+    const selectedContentDiv = document.getElementById('selected-content-types');
+    selectedContentDiv.innerHTML = `<strong>Selected Content Types:</strong> ${selectedOptions.join(', ')}`;
+}
 </script>
 
 </body>

@@ -5,10 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
 public class User {
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Id
     private String id;
     private String username;
@@ -17,6 +13,8 @@ public class User {
     private String email;
     private String gender;
     private String content;
+    private String firebaseUid;
+    private boolean emailVerified;
 
     // Constructors
     public User() {}
@@ -33,6 +31,11 @@ public class User {
     public String getId() {
         return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -79,5 +82,21 @@ public class User {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getFirebaseUid() {
+        return firebaseUid;
+    }
+
+    public void setFirebaseUid(String firebaseUid) {
+        this.firebaseUid = firebaseUid;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 }
